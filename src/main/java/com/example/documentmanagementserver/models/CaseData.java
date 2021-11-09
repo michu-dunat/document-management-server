@@ -1,9 +1,6 @@
 package com.example.documentmanagementserver.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class CaseData {
@@ -12,5 +9,16 @@ public class CaseData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @OneToOne
+    private AdversePartyData adversePartyData;
+
+    @OneToOne
+    private ClientData clientData;
+
+    @OneToOne
+    private CourtData courtData;
+
+    @OneToOne
+    private ProceedingsSubject proceedingsSubject;
 
 }

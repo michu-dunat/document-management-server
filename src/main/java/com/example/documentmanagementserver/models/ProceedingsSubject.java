@@ -1,9 +1,6 @@
 package com.example.documentmanagementserver.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class ProceedingsSubject {
@@ -16,6 +13,9 @@ public class ProceedingsSubject {
     private String fillingDate;
     private String claimReceiptDate;
     private Boolean isMediationPossible;
+
+    @OneToOne(mappedBy="proceedingsSubject")
+    private CaseData caseData;
 
     public int getId() {
         return id;

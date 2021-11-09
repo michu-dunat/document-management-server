@@ -1,9 +1,6 @@
 package com.example.documentmanagementserver.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class AdversePartyAttorneyData {
@@ -17,6 +14,28 @@ public class AdversePartyAttorneyData {
     private String residenceOrHeadquartersNumber;
     private Boolean isAttorneyProfessional;
     private String jobTitle;
+
+    @OneToOne
+    @JoinColumn(name = "ADVERSE_PARTY_DATA_ID", referencedColumnName = "ID")
+    private AdversePartyData adversePartyData;
+
+    public AdversePartyAttorneyData(int id, String firstnameAndLastname, String phoneNumber, String residenceOrHeadquartersNumber, Boolean isAttorneyProfessional, String jobTitle, AdversePartyData adversePartyData) {
+        this.id = id;
+        this.firstnameAndLastname = firstnameAndLastname;
+        this.phoneNumber = phoneNumber;
+        this.residenceOrHeadquartersNumber = residenceOrHeadquartersNumber;
+        this.isAttorneyProfessional = isAttorneyProfessional;
+        this.jobTitle = jobTitle;
+        this.adversePartyData = adversePartyData;
+    }
+
+    public AdversePartyData getAdversePartyData() {
+        return adversePartyData;
+    }
+
+    public void setAdversePartyData(AdversePartyData adversePartyData) {
+        this.adversePartyData = adversePartyData;
+    }
 
     public AdversePartyAttorneyData() {
     }

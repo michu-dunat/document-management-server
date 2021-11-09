@@ -20,6 +20,9 @@ public class ClientData {
     private String residenceOrHeadquartersNumber;
     private String mailingAddress;
 
+    @OneToOne(mappedBy="clientData")
+    private CaseData caseData;
+
     public ClientData() {
     }
 

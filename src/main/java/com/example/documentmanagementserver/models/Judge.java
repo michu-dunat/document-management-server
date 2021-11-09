@@ -1,9 +1,6 @@
 package com.example.documentmanagementserver.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Judge {
@@ -12,7 +9,19 @@ public class Judge {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @ManyToOne
+    private CourtData courtData;
+
     private String firstnameAndLastname;
+
+    public Judge(int id, CourtData courtData, String firstnameAndLastname) {
+        this.id = id;
+        this.courtData = courtData;
+        this.firstnameAndLastname = firstnameAndLastname;
+    }
+
+    public Judge() {
+    }
 
     public int getId() {
         return id;
@@ -22,19 +31,19 @@ public class Judge {
         this.id = id;
     }
 
+    public CourtData getCourtData() {
+        return courtData;
+    }
+
+    public void setCourtData(CourtData courtData) {
+        this.courtData = courtData;
+    }
+
     public String getFirstnameAndLastname() {
         return firstnameAndLastname;
     }
 
     public void setFirstnameAndLastname(String firstnameAndLastname) {
-        this.firstnameAndLastname = firstnameAndLastname;
-    }
-
-    public Judge() {
-    }
-
-    public Judge(int id, String firstnameAndLastname) {
-        this.id = id;
         this.firstnameAndLastname = firstnameAndLastname;
     }
 }
