@@ -21,5 +21,5 @@ public class Judge {
     @ManyToOne
     private CourtData courtData;
 
-    private String firstnameAndLastname;
+    private String firstnameAndLastName;
 }

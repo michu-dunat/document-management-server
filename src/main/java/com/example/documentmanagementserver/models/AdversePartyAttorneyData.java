@@ -18,9 +18,10 @@ public class AdversePartyAttorneyData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String firstnameAndLastname;
+    private String firstnameAndLastName;
     private String phoneNumber;
-    private String residenceOrHeadquartersNumber;
+    @ManyToOne
+    private Address residenceOrRegisteredOfficeAddress;
     private Boolean isAttorneyProfessional;
     private String jobTitle;
 

@@ -19,8 +19,8 @@ public class ProceedingsSubject {
     private int id;
 
     private String value;
-    private String fillingDate;
-    private String claimReceiptDate;
+    private java.sql.Date fillingDate;
+    private java.sql.Date claimReceiptDate;
     private Boolean isMediationPossible;
 
     @OneToOne(mappedBy = "proceedingsSubject")

@@ -26,8 +26,11 @@ public class ClientData {
     private String KRS;
     private String phoneNumber;
     private String emailAddress;
-    private String residenceOrHeadquartersNumber;
-    private String mailingAddress;
+    @ManyToOne
+    private Address residenceOrRegisteredOfficeAddress;
+    @ManyToOne
+    private Address mailingAddress;
+
 
     @OneToOne(mappedBy = "clientData")
     private CaseData caseData;

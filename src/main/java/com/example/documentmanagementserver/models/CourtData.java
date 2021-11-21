@@ -21,17 +21,16 @@ public class CourtData {
     private int id;
 
     private String type;
-    private String town;
-    private String address;
+    @ManyToOne
+    private Address address;
     private String department;
     private String phoneNumber;
-
+    private String electronicAddressForDelivery;
     @OneToMany(mappedBy = "courtData")
     private List<Judge> judgingPanel;
 
     @OneToOne(mappedBy = "courtData")
     private CaseData caseData;
 
-    private String electronicAddressForDelivery;
 
 }
