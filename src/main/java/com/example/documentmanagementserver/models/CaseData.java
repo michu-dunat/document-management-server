@@ -1,8 +1,17 @@
 package com.example.documentmanagementserver.models;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
 public class CaseData {
 
     @Id
@@ -21,54 +30,4 @@ public class CaseData {
     @OneToOne
     private ProceedingsSubject proceedingsSubject;
 
-    public CaseData(int id, AdversePartyData adversePartyData, ClientData clientData, CourtData courtData, ProceedingsSubject proceedingsSubject) {
-        this.id = id;
-        this.adversePartyData = adversePartyData;
-        this.clientData = clientData;
-        this.courtData = courtData;
-        this.proceedingsSubject = proceedingsSubject;
-    }
-
-    public CaseData() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public AdversePartyData getAdversePartyData() {
-        return adversePartyData;
-    }
-
-    public void setAdversePartyData(AdversePartyData adversePartyData) {
-        this.adversePartyData = adversePartyData;
-    }
-
-    public ClientData getClientData() {
-        return clientData;
-    }
-
-    public void setClientData(ClientData clientData) {
-        this.clientData = clientData;
-    }
-
-    public CourtData getCourtData() {
-        return courtData;
-    }
-
-    public void setCourtData(CourtData courtData) {
-        this.courtData = courtData;
-    }
-
-    public ProceedingsSubject getProceedingsSubject() {
-        return proceedingsSubject;
-    }
-
-    public void setProceedingsSubject(ProceedingsSubject proceedingsSubject) {
-        this.proceedingsSubject = proceedingsSubject;
-    }
 }

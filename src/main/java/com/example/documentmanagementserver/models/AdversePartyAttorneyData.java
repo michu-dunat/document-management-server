@@ -1,8 +1,17 @@
 package com.example.documentmanagementserver.models;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
 public class AdversePartyAttorneyData {
 
     @Id
@@ -19,81 +28,4 @@ public class AdversePartyAttorneyData {
     @JoinColumn(name = "ADVERSE_PARTY_DATA_ID", referencedColumnName = "ID")
     private AdversePartyData adversePartyData;
 
-    public AdversePartyAttorneyData(int id, String firstnameAndLastname, String phoneNumber, String residenceOrHeadquartersNumber, Boolean isAttorneyProfessional, String jobTitle, AdversePartyData adversePartyData) {
-        this.id = id;
-        this.firstnameAndLastname = firstnameAndLastname;
-        this.phoneNumber = phoneNumber;
-        this.residenceOrHeadquartersNumber = residenceOrHeadquartersNumber;
-        this.isAttorneyProfessional = isAttorneyProfessional;
-        this.jobTitle = jobTitle;
-        this.adversePartyData = adversePartyData;
-    }
-
-    public AdversePartyData getAdversePartyData() {
-        return adversePartyData;
-    }
-
-    public void setAdversePartyData(AdversePartyData adversePartyData) {
-        this.adversePartyData = adversePartyData;
-    }
-
-    public AdversePartyAttorneyData() {
-    }
-
-    public AdversePartyAttorneyData(int id, String firstnameAndLastname, String phoneNumber, String residenceOrHeadquartersNumber, Boolean isAttorneyProfessional, String jobTitle) {
-        this.id = id;
-        this.firstnameAndLastname = firstnameAndLastname;
-        this.phoneNumber = phoneNumber;
-        this.residenceOrHeadquartersNumber = residenceOrHeadquartersNumber;
-        this.isAttorneyProfessional = isAttorneyProfessional;
-        this.jobTitle = jobTitle;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getFirstnameAndLastname() {
-        return firstnameAndLastname;
-    }
-
-    public void setFirstnameAndLastname(String firstnameAndLastname) {
-        this.firstnameAndLastname = firstnameAndLastname;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getResidenceOrHeadquartersNumber() {
-        return residenceOrHeadquartersNumber;
-    }
-
-    public void setResidenceOrHeadquartersNumber(String residenceOrHeadquartersNumber) {
-        this.residenceOrHeadquartersNumber = residenceOrHeadquartersNumber;
-    }
-
-    public Boolean getAttorneyProfessional() {
-        return isAttorneyProfessional;
-    }
-
-    public void setAttorneyProfessional(Boolean attorneyProfessional) {
-        isAttorneyProfessional = attorneyProfessional;
-    }
-
-    public String getJobTitle() {
-        return jobTitle;
-    }
-
-    public void setJobTitle(String jobTitle) {
-        this.jobTitle = jobTitle;
-    }
 }

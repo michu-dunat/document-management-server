@@ -1,8 +1,17 @@
 package com.example.documentmanagementserver.models;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
 public class ProceedingsSubject {
 
     @Id
@@ -14,57 +23,7 @@ public class ProceedingsSubject {
     private String claimReceiptDate;
     private Boolean isMediationPossible;
 
-    @OneToOne(mappedBy="proceedingsSubject")
+    @OneToOne(mappedBy = "proceedingsSubject")
     private CaseData caseData;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public String getFillingDate() {
-        return fillingDate;
-    }
-
-    public void setFillingDate(String fillingDate) {
-        this.fillingDate = fillingDate;
-    }
-
-    public String getClaimReceiptDate() {
-        return claimReceiptDate;
-    }
-
-    public void setClaimReceiptDate(String claimReceiptDate) {
-        this.claimReceiptDate = claimReceiptDate;
-    }
-
-    public Boolean getMediationPossible() {
-        return isMediationPossible;
-    }
-
-    public void setMediationPossible(Boolean mediationPossible) {
-        isMediationPossible = mediationPossible;
-    }
-
-    public ProceedingsSubject() {
-    }
-
-    public ProceedingsSubject(int id, String value, String fillingDate, String claimReceiptDate, Boolean isMediationPossible) {
-        this.id = id;
-        this.value = value;
-        this.fillingDate = fillingDate;
-        this.claimReceiptDate = claimReceiptDate;
-        this.isMediationPossible = isMediationPossible;
-    }
 }
