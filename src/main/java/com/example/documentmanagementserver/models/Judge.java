@@ -19,7 +19,7 @@ public class Judge {
     private int id;
 
     private String firstnameAndLastName;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     private Court court;
 
 }

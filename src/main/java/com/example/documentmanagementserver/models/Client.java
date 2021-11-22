@@ -27,9 +27,9 @@ public class Client {
     private String KRS;
     private String phoneNumber;
     private String emailAddress;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     private Address residenceOrRegisteredOfficeAddress;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     private Address mailingAddress;
 
     @OneToMany(mappedBy = "client")

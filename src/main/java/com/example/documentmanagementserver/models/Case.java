@@ -19,13 +19,13 @@ public class Case {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     private AdverseParty adverseParty;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     private Client client;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     private Court court;
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private ProceedingsSubject proceedingsSubject;
 
 }

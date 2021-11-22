@@ -21,7 +21,7 @@ public class Court {
     private int id;
 
     private String type;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     private Address address;
     private String department;
     private String phoneNumber;
