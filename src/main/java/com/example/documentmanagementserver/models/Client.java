@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -26,12 +27,12 @@ public class Client {
     private String KRS;
     private String phoneNumber;
     private String emailAddress;
-    @OneToOne
+    @ManyToOne
     private Address residenceOrRegisteredOfficeAddress;
-    @OneToOne
+    @ManyToOne
     private Address mailingAddress;
 
-    @OneToOne(mappedBy = "client")
-    private Case aCase;
+    @OneToMany(mappedBy = "client")
+    private List<Case> cases;
 
 }

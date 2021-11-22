@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,9 +21,12 @@ public class AdversePartyAttorney {
 
     private String firstnameAndLastName;
     private String phoneNumber;
-    @OneToOne
+    @ManyToOne
     private Address residenceOrRegisteredOfficeAddress;
     private Boolean isAttorneyProfessional;
     private String jobTitle;
+
+    @OneToMany(mappedBy = "adversePartyAttorney")
+    private List<AdverseParty> adverseParties;
 
 }

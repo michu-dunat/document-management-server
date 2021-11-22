@@ -6,7 +6,9 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 @Getter
@@ -15,9 +17,9 @@ import javax.persistence.OneToOne;
 @ToString
 public class AdverseParty extends Client {
 
-    @OneToOne
+    @ManyToOne
     private AdversePartyAttorney adversePartyAttorney;
 
-    @OneToOne(mappedBy = "adverseParty")
-    private Case aCase;
+    @OneToMany(mappedBy = "adverseParty")
+    private List<Case> cases;
 }

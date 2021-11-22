@@ -24,4 +24,15 @@ public class Address {
     private String buildingNumber;
     private String apartmentNumber;
 
+    @OneToMany(mappedBy = "residenceOrRegisteredOfficeAddress")
+    private List<AdversePartyAttorney> adversePartyAttorneys;
+
+    @OneToMany(mappedBy = "residenceOrRegisteredOfficeAddress")
+    private List<Client> clientsResidenceOrRegisteredOfficeAddress;
+
+    @OneToMany(mappedBy = "mailingAddress")
+    private List<Client> clientsMailingAddress;
+
+    @OneToMany(mappedBy = "address")
+    private List<Court> courts;
 }

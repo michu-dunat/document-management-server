@@ -19,11 +19,11 @@ public class Case {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne
+    @ManyToOne
     private AdverseParty adverseParty;
-    @OneToOne
+    @ManyToOne
     private Client client;
-    @OneToOne
+    @ManyToOne
     private Court court;
     @OneToOne
     private ProceedingsSubject proceedingsSubject;

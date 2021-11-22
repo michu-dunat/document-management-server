@@ -21,7 +21,7 @@ public class Court {
     private int id;
 
     private String type;
-    @OneToOne
+    @ManyToOne
     private Address address;
     private String department;
     private String phoneNumber;
@@ -30,7 +30,7 @@ public class Court {
     @OneToMany(mappedBy = "court")
     private List<Judge> judgingPanel;
 
-    @OneToOne(mappedBy = "court")
-    private Case aCase;
+    @OneToMany(mappedBy = "court")
+    private List<Case> cases;
 
 }
