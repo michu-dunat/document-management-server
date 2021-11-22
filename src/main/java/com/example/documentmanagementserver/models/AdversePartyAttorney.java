@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @ToString
-public class AdversePartyAttorneyData {
+public class AdversePartyAttorney {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,13 +20,9 @@ public class AdversePartyAttorneyData {
 
     private String firstnameAndLastName;
     private String phoneNumber;
-    @ManyToOne
+    @OneToOne
     private Address residenceOrRegisteredOfficeAddress;
     private Boolean isAttorneyProfessional;
     private String jobTitle;
-
-    @OneToOne
-    @JoinColumn(name = "ADVERSE_PARTY_DATA_ID", referencedColumnName = "ID")
-    private AdversePartyData adversePartyData;
 
 }

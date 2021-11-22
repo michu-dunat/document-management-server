@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @ToString
-public class ClientData {
+public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -26,13 +26,12 @@ public class ClientData {
     private String KRS;
     private String phoneNumber;
     private String emailAddress;
-    @ManyToOne
+    @OneToOne
     private Address residenceOrRegisteredOfficeAddress;
-    @ManyToOne
+    @OneToOne
     private Address mailingAddress;
 
-
-    @OneToOne(mappedBy = "clientData")
-    private CaseData caseData;
+    @OneToOne(mappedBy = "client")
+    private Case aCase;
 
 }

@@ -14,23 +14,23 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @ToString
-public class CourtData {
+public class Court {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String type;
-    @ManyToOne
+    @OneToOne
     private Address address;
     private String department;
     private String phoneNumber;
     private String electronicAddressForDelivery;
-    @OneToMany(mappedBy = "courtData")
+
+    @OneToMany(mappedBy = "court")
     private List<Judge> judgingPanel;
 
-    @OneToOne(mappedBy = "courtData")
-    private CaseData caseData;
-
+    @OneToOne(mappedBy = "court")
+    private Case aCase;
 
 }

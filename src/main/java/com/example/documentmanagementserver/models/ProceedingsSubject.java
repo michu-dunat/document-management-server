@@ -24,6 +24,6 @@ public class ProceedingsSubject {
     private Boolean isMediationPossible;
 
     @OneToOne(mappedBy = "proceedingsSubject")
-    private CaseData caseData;
+    private Case aCase;
 
 }

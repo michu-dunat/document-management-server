@@ -13,11 +13,11 @@ import javax.persistence.OneToOne;
 @Setter
 @NoArgsConstructor
 @ToString
-public class AdversePartyData extends ClientData {
+public class AdverseParty extends Client {
 
-    @OneToOne(mappedBy="adversePartyData")
-    private AdversePartyAttorneyData adversePartyAttorneyData;
+    @OneToOne
+    private AdversePartyAttorney adversePartyAttorney;
 
-    @OneToOne(mappedBy="adversePartyData")
-    private CaseData caseData;
+    @OneToOne(mappedBy = "adverseParty")
+    private Case aCase;
 }

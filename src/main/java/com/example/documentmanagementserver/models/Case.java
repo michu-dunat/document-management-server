@@ -12,21 +12,19 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @ToString
-public class CaseData {
+@Table(name = "t_case")
+public class Case {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @OneToOne
-    private AdversePartyData adversePartyData;
-
+    private AdverseParty adverseParty;
     @OneToOne
-    private ClientData clientData;
-
+    private Client client;
     @OneToOne
-    private CourtData courtData;
-
+    private Court court;
     @OneToOne
     private ProceedingsSubject proceedingsSubject;
 

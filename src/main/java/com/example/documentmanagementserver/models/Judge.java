@@ -18,8 +18,8 @@ public class Judge {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
-    private CourtData courtData;
-
     private String firstnameAndLastName;
+    @ManyToOne
+    private Court court;
+
 }
