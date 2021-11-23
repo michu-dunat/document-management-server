@@ -25,8 +25,11 @@ public class AdversePartyAttorney {
     private Address residenceOrRegisteredOfficeAddress;
     private Boolean isAttorneyProfessional;
     private String jobTitle;
+    @ManyToOne(cascade = {CascadeType.ALL})
+    private Address mailingAddress;
 
     @OneToMany(mappedBy = "adversePartyAttorney")
+    @ToString.Exclude
     private List<AdverseParty> adverseParties;
 
 }

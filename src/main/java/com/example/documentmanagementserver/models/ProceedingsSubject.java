@@ -24,6 +24,7 @@ public class ProceedingsSubject {
     private Boolean isMediationPossible;
 
     @OneToOne(mappedBy = "proceedingsSubject")
+    @ToString.Exclude
     private Case aCase;
 
 }

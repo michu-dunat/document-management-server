@@ -21,10 +21,10 @@ public class Client {
     private int id;
 
     private String firstnameAndLastNameOrCompanyName;
-    private String PESEL;
-    private String NIP;
-    private String REGON;
-    private String KRS;
+    private String pesel;
+    private String nip;
+    private String regon;
+    private String krs;
     private String phoneNumber;
     private String emailAddress;
     @ManyToOne(cascade = {CascadeType.ALL})
@@ -33,6 +33,7 @@ public class Client {
     private Address mailingAddress;
 
     @OneToMany(mappedBy = "client")
+    @ToString.Exclude
     private List<Case> cases;
 
 }

@@ -25,14 +25,22 @@ public class Address {
     private String apartmentNumber;
 
     @OneToMany(mappedBy = "residenceOrRegisteredOfficeAddress")
-    private List<AdversePartyAttorney> adversePartyAttorneys;
-
-    @OneToMany(mappedBy = "residenceOrRegisteredOfficeAddress")
+    @ToString.Exclude
     private List<Client> clientsResidenceOrRegisteredOfficeAddress;
 
     @OneToMany(mappedBy = "mailingAddress")
+    @ToString.Exclude
     private List<Client> clientsMailingAddress;
 
+    @OneToMany(mappedBy = "residenceOrRegisteredOfficeAddress")
+    @ToString.Exclude
+    private List<AdversePartyAttorney> adversePartyAttorneys;
+
+    @OneToMany(mappedBy = "mailingAddress")
+    @ToString.Exclude
+    private List<AdversePartyAttorney> adversePartyAttorneysMailingAddress;
+
     @OneToMany(mappedBy = "address")
+    @ToString.Exclude
     private List<Court> courts;
 }

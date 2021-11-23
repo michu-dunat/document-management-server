@@ -20,10 +20,11 @@ public class CaseController {
     @PostMapping("/case/add")
     public ResponseEntity<Integer> addCase(@RequestBody Case aCase) {
         //try {
-            caseRepository.save(aCase);
+        //    caseRepository.save(aCase);
         //} catch (Exception e) {
         //    return new ResponseEntity<>(406, HttpStatus.NOT_ACCEPTABLE);
         //}
+        System.out.println(aCase);
         return new ResponseEntity<>(200, HttpStatus.OK);
     }
 }

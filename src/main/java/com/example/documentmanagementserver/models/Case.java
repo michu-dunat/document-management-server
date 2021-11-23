@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -20,12 +21,15 @@ public class Case {
     private int id;
 
     @ManyToOne(cascade = {CascadeType.ALL})
-    private AdverseParty adverseParty;
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @NotNull
     private Client client;
     @ManyToOne(cascade = {CascadeType.ALL})
+    @NotNull
     private Court court;
     @OneToOne(cascade = {CascadeType.ALL})
+    @NotNull
     private ProceedingsSubject proceedingsSubject;
+    @ManyToOne(cascade = {CascadeType.ALL})
+    private AdverseParty adverseParty;
 
 }

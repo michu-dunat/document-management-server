@@ -15,12 +15,13 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+@ToString(callSuper=true)
 public class AdverseParty extends Client {
 
     @ManyToOne(cascade = {CascadeType.ALL})
     private AdversePartyAttorney adversePartyAttorney;
 
     @OneToMany(mappedBy = "adverseParty")
+    @ToString.Exclude
     private List<Case> cases;
 }

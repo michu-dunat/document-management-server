@@ -31,6 +31,7 @@ public class Court {
     private List<Judge> judgingPanel;
 
     @OneToMany(mappedBy = "court")
+    @ToString.Exclude
     private List<Case> cases;
 
 }

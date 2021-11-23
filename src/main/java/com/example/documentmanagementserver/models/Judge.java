@@ -19,7 +19,9 @@ public class Judge {
     private int id;
 
     private String firstnameAndLastName;
+
     @ManyToOne(cascade = {CascadeType.ALL})
+    @ToString.Exclude
     private Court court;
 
 }
