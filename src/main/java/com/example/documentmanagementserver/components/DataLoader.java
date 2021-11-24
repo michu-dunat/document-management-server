@@ -33,7 +33,16 @@ public class DataLoader implements ApplicationRunner {
         ProceedingsSubject proceedingsSubject = new ProceedingsSubject("1000ZŁ", true);
         Date date = Date.valueOf("2021-11-15");
         proceedingsSubject.setClaimReceiptDate(date);
-        Case aCase = new Case(client, court, proceedingsSubject);
+
+
+        Address address9 = new Address("Białystok", "11-100", "Majorska", "12");
+        Address address10 = new Address("Zabrze", "22-110", "Rejsowa", "11");
+
+        AdversePartyAttorney adversePartyAttorney1 = new AdversePartyAttorney("Michał Rosa", "666533256", address9, true, "Adwokat");
+        AdverseParty adverseParty1 = new AdverseParty("Zuzanna Las", "95444440000",
+                "100-00-00-762", "567458123", "0013001563", "720340100",
+                "example@o2.com", address10, adversePartyAttorney1);
+        Case aCase = new Case(client, adverseParty1, proceedingsSubject, court);
         caseRepository.save(aCase);
 
         Address address2 = new Address("Wrocław", "50-100", "Łabędzia", "59");
@@ -75,8 +84,7 @@ public class DataLoader implements ApplicationRunner {
                 "example@gmail.com", address7, adversePartyAttorney);
         adverseParty.setMailingAddress(address8);
 
-        Case aCase1 = new Case(client1, court1, proceedingsSubject1);
-        aCase1.setAdverseParty(adverseParty);
+        Case aCase1 = new Case(client1, adverseParty, proceedingsSubject1, court1);
         caseRepository.save(aCase1);
     }
 }

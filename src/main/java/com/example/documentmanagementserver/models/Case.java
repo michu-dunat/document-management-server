@@ -22,16 +22,18 @@ public class Case {
     private Client client;
     @OneToOne(cascade = {CascadeType.ALL})
     @NotNull
-    private Court court;
+    private AdverseParty adverseParty;
     @OneToOne(cascade = {CascadeType.ALL})
     @NotNull
     private ProceedingsSubject proceedingsSubject;
     @OneToOne(cascade = {CascadeType.ALL})
-    private AdverseParty adverseParty;
+    @NotNull
+    private Court court;
 
-    public Case(Client client, Court court, ProceedingsSubject proceedingsSubject) {
+    public Case(Client client, AdverseParty adverseParty, ProceedingsSubject proceedingsSubject, Court court) {
         this.client = client;
-        this.court = court;
+        this.adverseParty = adverseParty;
         this.proceedingsSubject = proceedingsSubject;
+        this.court = court;
     }
 }
