@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -18,10 +19,15 @@ public class Judge {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotNull
     private String firstnameAndLastName;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     @ToString.Exclude
+    @JoinColumn
     private Court court;
 
+    public Judge(String firstnameAndLastName) {
+        this.firstnameAndLastName = firstnameAndLastName;
+    }
 }

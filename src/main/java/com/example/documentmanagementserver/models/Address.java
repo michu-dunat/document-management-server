@@ -1,11 +1,9 @@
 package com.example.documentmanagementserver.models;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -13,15 +11,25 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @EqualsAndHashCode.Include
+    @NotNull
     private String city;
+    @EqualsAndHashCode.Include
+    @NotNull
     private String postcode;
+    @EqualsAndHashCode.Include
+    @NotNull
     private String street;
+    @EqualsAndHashCode.Include
+    @NotNull
     private String buildingNumber;
+    @EqualsAndHashCode.Include
     private String apartmentNumber;
 
     @OneToMany(mappedBy = "residenceOrRegisteredOfficeAddress")
@@ -43,4 +51,11 @@ public class Address {
     @OneToMany(mappedBy = "address")
     @ToString.Exclude
     private List<Court> courts;
+
+    public Address(String city, String postcode, String street, String buildingNumber) {
+        this.city = city;
+        this.postcode = postcode;
+        this.street = street;
+        this.buildingNumber = buildingNumber;
+    }
 }

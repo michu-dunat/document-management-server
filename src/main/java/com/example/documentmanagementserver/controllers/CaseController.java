@@ -1,6 +1,8 @@
 package com.example.documentmanagementserver.controllers;
 
+import com.example.documentmanagementserver.models.Address;
 import com.example.documentmanagementserver.models.Case;
+import com.example.documentmanagementserver.repositories.AddressRepository;
 import com.example.documentmanagementserver.repositories.CaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,9 @@ public class CaseController {
     @Autowired
     private CaseRepository caseRepository;
 
+    @Autowired
+    private AddressRepository addressRepository;
+
     @PostMapping("/case/add")
     public ResponseEntity<Integer> addCase(@RequestBody Case aCase) {
         //try {
@@ -24,6 +29,8 @@ public class CaseController {
         //} catch (Exception e) {
         //    return new ResponseEntity<>(406, HttpStatus.NOT_ACCEPTABLE);
         //}
+        caseRepository.save(aCase);
+
         System.out.println(aCase);
         return new ResponseEntity<>(200, HttpStatus.OK);
     }
