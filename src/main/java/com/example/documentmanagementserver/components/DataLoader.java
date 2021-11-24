@@ -1,7 +1,6 @@
 package com.example.documentmanagementserver.components;
 
 import com.example.documentmanagementserver.models.*;
-import com.example.documentmanagementserver.repositories.AddressRepository;
 import com.example.documentmanagementserver.repositories.CaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -36,5 +35,48 @@ public class DataLoader implements ApplicationRunner {
         proceedingsSubject.setClaimReceiptDate(date);
         Case aCase = new Case(client, court, proceedingsSubject);
         caseRepository.save(aCase);
+
+        Address address2 = new Address("Wrocław", "50-100", "Łabędzia", "59");
+        Address address3 = new Address("Katowice", "23-110", "Różana", "23");
+        address3.setApartmentNumber("12");
+        Address address4 = new Address("Warszawa", "34-110", "Miła", "57");
+        Address address5 = new Address("Gdańsk", "57-110", "Szybka", "14");
+        address5.setApartmentNumber("32");
+        Address address6 = new Address("Tychy", "89-110", "Plac Powstańców", "7");
+        Address address7 = new Address("Bieruń", "61-110", "Górzysta", "5");
+        Address address8 = new Address("Brzeg", "21-110", "Brzegowa", "2a");
+        address8.setApartmentNumber("11a");
+
+        Client client1 = new Client("Jakub Jerzy", "95040200120",
+                "122-00-00-166", "135467528", "0000154123", "666000000",
+                "email@example.com", address2);
+        client1.setMailingAddress(address3);
+
+        Judge judge2 = new Judge("Jan Kowalski");
+        Judge judge3 = new Judge("Tomasz Przedziałowy");
+        Judge judge4 = new Judge("Adam Tkacz");
+        Judge judge5 = new Judge("Matylda Ernel");
+        List<Judge> judges1 = new ArrayList<>();
+        judges1.add(judge2);
+        judges1.add(judge3);
+        judges1.add(judge4);
+        judges1.add(judge5);
+        Court court1 = new Court("Okręgowy", address4, "2", "583065334", "5oy0bo2g0u", judges1);
+        court1.addCourtToAllJudges();
+
+        ProceedingsSubject proceedingsSubject1 = new ProceedingsSubject("2000ZŁ", false);
+        Date date1 = Date.valueOf("2021-11-14");
+        proceedingsSubject1.setFillingDate(date1);
+
+        AdversePartyAttorney adversePartyAttorney = new AdversePartyAttorney("Elżbieta Górnaś", "666256000", address5, true, "Radca prawny");
+        adversePartyAttorney.setMailingAddress(address6);
+        AdverseParty adverseParty = new AdverseParty("Joachim Mały", "92111000000",
+                "100-00-00-562", "567812345", "0013300156", "700200100",
+                "example@gmail.com", address7, adversePartyAttorney);
+        adverseParty.setMailingAddress(address8);
+
+        Case aCase1 = new Case(client1, court1, proceedingsSubject1);
+        aCase1.setAdverseParty(adverseParty);
+        caseRepository.save(aCase1);
     }
 }
