@@ -11,36 +11,29 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class AdversePartyAttorney {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @EqualsAndHashCode.Include
     @NotNull
     private String firstnameAndLastName;
-    @EqualsAndHashCode.Include
     @NotNull
     private String phoneNumber;
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @EqualsAndHashCode.Include
+    @OneToOne(cascade = {CascadeType.ALL})
     @NotNull
     private Address residenceOrRegisteredOfficeAddress;
-    @EqualsAndHashCode.Include
     @NotNull
     private Boolean isAttorneyProfessional;
-    @EqualsAndHashCode.Include
     @NotNull
     private String jobTitle;
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @EqualsAndHashCode.Include
+    @OneToOne(cascade = {CascadeType.ALL})
     private Address mailingAddress;
 
-    @OneToMany(mappedBy = "adversePartyAttorney")
+    @OneToOne(mappedBy = "adversePartyAttorney")
     @ToString.Exclude
-    private List<AdverseParty> adverseParties;
+    private AdverseParty adverseParty;
 
     public AdversePartyAttorney(String firstnameAndLastName, String phoneNumber, Address residenceOrRegisteredOfficeAddress, Boolean isAttorneyProfessional, String jobTitle) {
         this.firstnameAndLastName = firstnameAndLastName;

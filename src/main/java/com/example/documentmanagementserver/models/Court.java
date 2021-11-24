@@ -12,27 +12,21 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Court {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @EqualsAndHashCode.Include
     @NotNull
     private String type;
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @EqualsAndHashCode.Include
+    @OneToOne(cascade = {CascadeType.ALL})
     @NotNull
     private Address address;
-    @EqualsAndHashCode.Include
     @NotNull
     private String department;
-    @EqualsAndHashCode.Include
     @NotNull
     private String phoneNumber;
-    @EqualsAndHashCode.Include
     @NotNull
     private String electronicAddressForDelivery;
 
@@ -40,9 +34,9 @@ public class Court {
     @NotNull
     private List<Judge> judgingPanel;
 
-    @OneToMany(mappedBy = "court")
+    @OneToOne(mappedBy = "court")
     @ToString.Exclude
-    private List<Case> cases;
+    private Case aCase;
 
     public Court(String type, Address address, String department, String phoneNumber, String electronicAddressForDelivery, List<Judge> judgingPanel) {
         this.type = type;

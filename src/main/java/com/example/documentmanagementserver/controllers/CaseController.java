@@ -24,14 +24,12 @@ public class CaseController {
 
     @PostMapping("/case/add")
     public ResponseEntity<Integer> addCase(@RequestBody Case aCase) {
-        //try {
-        //    caseRepository.save(aCase);
-        //} catch (Exception e) {
-        //    return new ResponseEntity<>(406, HttpStatus.NOT_ACCEPTABLE);
-        //}
         aCase.getCourt().addCourtToAllJudges();
-        caseRepository.save(aCase);
-        System.out.println(aCase);
+        try {
+            caseRepository.save(aCase);
+        } catch (Exception e) {
+            return new ResponseEntity<>(500, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
         return new ResponseEntity<>(200, HttpStatus.OK);
     }
 }

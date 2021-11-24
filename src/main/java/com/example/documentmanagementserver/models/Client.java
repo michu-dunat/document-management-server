@@ -12,45 +12,35 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private int id;
 
-    @EqualsAndHashCode.Include
     @NotNull
     private String firstnameAndLastNameOrCompanyName;
-    @EqualsAndHashCode.Include
     @NotNull
     private String pesel;
     @NotNull
-    @EqualsAndHashCode.Include
     private String nip;
-    @EqualsAndHashCode.Include
     @NotNull
     private String regon;
-    @EqualsAndHashCode.Include
     @NotNull
     private String krs;
     @NotNull
-    @EqualsAndHashCode.Include
     private String phoneNumber;
-    @EqualsAndHashCode.Include
     @NotNull
     private String emailAddress;
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @EqualsAndHashCode.Include
+    @OneToOne(cascade = {CascadeType.ALL})
     @NotNull
     private Address residenceOrRegisteredOfficeAddress;
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @EqualsAndHashCode.Include
+    @OneToOne(cascade = {CascadeType.ALL})
     private Address mailingAddress;
 
-    @OneToMany(mappedBy = "client")
+    @OneToOne(mappedBy = "client")
     @ToString.Exclude
-    private List<Case> cases;
+    private Case aCase;
 
     public Client(String firstnameAndLastNameOrCompanyName, String pesel, String nip, String regon, String krs, String phoneNumber, String emailAddress, Address residenceOrRegisteredOfficeAddress) {
         this.firstnameAndLastNameOrCompanyName = firstnameAndLastNameOrCompanyName;

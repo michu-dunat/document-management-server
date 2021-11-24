@@ -11,46 +11,40 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @EqualsAndHashCode.Include
     @NotNull
     private String city;
-    @EqualsAndHashCode.Include
     @NotNull
     private String postcode;
-    @EqualsAndHashCode.Include
     @NotNull
     private String street;
-    @EqualsAndHashCode.Include
     @NotNull
     private String buildingNumber;
-    @EqualsAndHashCode.Include
     private String apartmentNumber;
 
-    @OneToMany(mappedBy = "residenceOrRegisteredOfficeAddress")
+    @OneToOne(mappedBy = "residenceOrRegisteredOfficeAddress")
     @ToString.Exclude
-    private List<Client> clientsResidenceOrRegisteredOfficeAddress;
+    private Client clientResidenceOrRegisteredOfficeAddress;
 
-    @OneToMany(mappedBy = "mailingAddress")
+    @OneToOne(mappedBy = "mailingAddress")
     @ToString.Exclude
-    private List<Client> clientsMailingAddress;
+    private Client clientMailingAddress;
 
-    @OneToMany(mappedBy = "residenceOrRegisteredOfficeAddress")
+    @OneToOne(mappedBy = "residenceOrRegisteredOfficeAddress")
     @ToString.Exclude
-    private List<AdversePartyAttorney> adversePartyAttorneys;
+    private AdversePartyAttorney adversePartyAttorneyResidenceOrRegisteredOfficeAddress;
 
-    @OneToMany(mappedBy = "mailingAddress")
+    @OneToOne(mappedBy = "mailingAddress")
     @ToString.Exclude
-    private List<AdversePartyAttorney> adversePartyAttorneysMailingAddress;
+    private AdversePartyAttorney adversePartyAttorneyMailingAddress;
 
-    @OneToMany(mappedBy = "address")
+    @OneToOne(mappedBy = "address")
     @ToString.Exclude
-    private List<Court> courts;
+    private Court court;
 
     public Address(String city, String postcode, String street, String buildingNumber) {
         this.city = city;

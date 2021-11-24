@@ -10,21 +10,16 @@ import javax.validation.constraints.NotNull;
 @Setter
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class ProceedingsSubject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @EqualsAndHashCode.Include
     @NotNull
     private String value;
-    @EqualsAndHashCode.Include
     private java.sql.Date fillingDate;
-    @EqualsAndHashCode.Include
     private java.sql.Date claimReceiptDate;
-    @EqualsAndHashCode.Include
     @NotNull
     private Boolean isMediationPossible;
 
