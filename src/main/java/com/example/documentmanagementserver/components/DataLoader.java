@@ -29,12 +29,12 @@ public class DataLoader implements ApplicationRunner {
         List<Judge> judges = new ArrayList<>();
         judges.add(judge);
         judges.add(judge1);
-        System.out.println(judges);
         Court court = new Court("Rejonowy", address1, "4", "123456789", "o2g50b0uoy", judges);
+        court.addCourtToAllJudges();
         ProceedingsSubject proceedingsSubject = new ProceedingsSubject("1000ZŁ", true);
         Date date = Date.valueOf("2021-11-15");
         proceedingsSubject.setClaimReceiptDate(date);
         Case aCase = new Case(client, court, proceedingsSubject);
-        caseRepository.saveAndFlush(aCase);
+        caseRepository.save(aCase);
     }
 }

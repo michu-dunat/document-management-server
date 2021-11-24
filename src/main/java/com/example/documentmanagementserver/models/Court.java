@@ -36,7 +36,8 @@ public class Court {
     @NotNull
     private String electronicAddressForDelivery;
 
-    @OneToMany(cascade = {CascadeType.ALL, CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "court")
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "court")
+    @NotNull
     private List<Judge> judgingPanel;
 
     @OneToMany(mappedBy = "court")
@@ -50,5 +51,12 @@ public class Court {
         this.phoneNumber = phoneNumber;
         this.electronicAddressForDelivery = electronicAddressForDelivery;
         this.judgingPanel = judgingPanel;
+    }
+
+    public void addCourtToAllJudges() {
+        for (Judge judge : this.judgingPanel
+             ) {
+            judge.setCourt(this);
+        }
     }
 }

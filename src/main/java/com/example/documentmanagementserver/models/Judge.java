@@ -24,7 +24,6 @@ public class Judge {
 
     @ManyToOne
     @ToString.Exclude
-    @JoinColumn
     private Court court;
 
     public Judge(String firstnameAndLastName) {

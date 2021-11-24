@@ -1,7 +1,7 @@
 package com.example.documentmanagementserver.controllers;
 
-import com.example.documentmanagementserver.models.Address;
 import com.example.documentmanagementserver.models.Case;
+import com.example.documentmanagementserver.models.Judge;
 import com.example.documentmanagementserver.repositories.AddressRepository;
 import com.example.documentmanagementserver.repositories.CaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +29,8 @@ public class CaseController {
         //} catch (Exception e) {
         //    return new ResponseEntity<>(406, HttpStatus.NOT_ACCEPTABLE);
         //}
+        aCase.getCourt().addCourtToAllJudges();
         caseRepository.save(aCase);
-
         System.out.println(aCase);
         return new ResponseEntity<>(200, HttpStatus.OK);
     }

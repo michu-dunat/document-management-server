@@ -28,7 +28,6 @@ public class Client {
     @NotNull
     @EqualsAndHashCode.Include
     private String nip;
-    @NotNull
     @EqualsAndHashCode.Include
     @NotNull
     private String regon;
@@ -37,7 +36,6 @@ public class Client {
     private String krs;
     @NotNull
     @EqualsAndHashCode.Include
-    @NotNull
     private String phoneNumber;
     @EqualsAndHashCode.Include
     @NotNull
