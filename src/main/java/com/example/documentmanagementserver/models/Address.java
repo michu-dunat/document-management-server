@@ -59,13 +59,4 @@ public class Address {
         this.street = street;
         this.buildingNumber = buildingNumber;
     }
-
-    public boolean checkIfShouldBeRemoved() {
-        if(Objects.equals(this.city, "-1") && Objects.equals(this.postcode, "-1") &&
-                Objects.equals(this.street, "-1") && Objects.equals(this.buildingNumber, "-1") &&
-                Objects.equals(this.apartmentNumber, "-1")) {
-            return true;
-        }
-        return false;
-    }
 }

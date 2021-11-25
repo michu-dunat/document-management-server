@@ -11,7 +11,6 @@ import javax.validation.constraints.NotNull;
 @Setter
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode
 public class Judge {
 
     @Id
