@@ -29,7 +29,7 @@ public class CaseService {
             } else {
                 fillingOrClaimingDate = aCase.getProceedingsSubject().getFillingDate();
             }
-            casesForTable.add(new CaseForTable(aCase.getId(), label, fillingOrClaimingDate));
+            casesForTable.add(new CaseForTable(aCase.getId(), label, fillingOrClaimingDate, aCase.getStatus()));
         }
         return casesForTable;
     }

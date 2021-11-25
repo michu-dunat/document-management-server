@@ -16,10 +16,12 @@ public class CaseForTable {
     private int id;
     private String label;
     private Date fillingOrClaimingDate;
+    private String status;
 
-    public CaseForTable(int id, String label, Date fillingOrClaimingDate) {
+    public CaseForTable(int id, String label, Date fillingOrClaimingDate, String status) {
         this.id = id;
         this.label = label;
         this.fillingOrClaimingDate = fillingOrClaimingDate;
+        this.status = status;
     }
 }

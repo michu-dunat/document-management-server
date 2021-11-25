@@ -30,10 +30,14 @@ public class Case {
     @NotNull
     private Court court;
 
+    @NotNull
+    private String status;
+
     public Case(Client client, AdverseParty adverseParty, ProceedingsSubject proceedingsSubject, Court court) {
         this.client = client;
         this.adverseParty = adverseParty;
         this.proceedingsSubject = proceedingsSubject;
         this.court = court;
+        this.status = "W toku";
     }
 }

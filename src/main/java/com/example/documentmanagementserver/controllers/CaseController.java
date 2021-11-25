@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @CrossOrigin(origins = "http://localhost:4200")
@@ -47,6 +48,20 @@ public class CaseController {
     public ResponseEntity<Integer> deleteCase(@PathVariable(value = "id") int id) {
         try {
             caseRepository.deleteById(id);
+        } catch (Exception e) {
+            return new ResponseEntity<>(500, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>(200, HttpStatus.OK);
+    }
+
+    @PatchMapping("/case/status/{id}")
+    public ResponseEntity<?> changeCaseStatus(@PathVariable(value = "id") int id, @RequestBody String status) {
+        try {
+            Optional<Case> optCase = caseRepository.findById(id);
+            optCase.ifPresent(aCase -> {
+                aCase.setStatus(status);
+                caseRepository.save(aCase);
+            });
         } catch (Exception e) {
             return new ResponseEntity<>(500, HttpStatus.INTERNAL_SERVER_ERROR);
         }
