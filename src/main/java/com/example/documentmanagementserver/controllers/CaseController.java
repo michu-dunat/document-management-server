@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -81,19 +82,7 @@ public class CaseController {
 
     @PutMapping("/case/update")
     public ResponseEntity<Integer> updateCase(@RequestBody Case aCase) {
-        System.out.println(aCase.getCourt().getJudgingPanel());
-        Optional<Case> bCase = caseRepository.findById(aCase.getId());
-        if(bCase.isPresent()) {
-            for (Judge judge : bCase.get().getCourt().getJudgingPanel()
-            ) {
-                if(!aCase.getCourt().getJudgingPanel().contains(judge)) {
-                    System.out.println(judge);
-
-                    System.out.println("Halo?");
-                    judgeRepository.delete(judge.getId());
-                }
-            }
-        }
+        judgeRepository.deleteAllByCourt(aCase.getCourt());
         aCase.getCourt().addCourtToAllJudges();
         try {
             caseRepository.save(aCase);
