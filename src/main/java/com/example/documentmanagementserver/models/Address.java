@@ -1,5 +1,6 @@
 package com.example.documentmanagementserver.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,22 +27,27 @@ public class Address {
     private String buildingNumber;
     private String apartmentNumber;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "residenceOrRegisteredOfficeAddress")
     @ToString.Exclude
     private Client clientResidenceOrRegisteredOfficeAddress;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "mailingAddress")
     @ToString.Exclude
     private Client clientMailingAddress;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "residenceOrRegisteredOfficeAddress")
     @ToString.Exclude
     private AdversePartyAttorney adversePartyAttorneyResidenceOrRegisteredOfficeAddress;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "mailingAddress")
     @ToString.Exclude
     private AdversePartyAttorney adversePartyAttorneyMailingAddress;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "address")
     @ToString.Exclude
     private Court court;

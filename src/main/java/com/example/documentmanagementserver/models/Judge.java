@@ -1,5 +1,6 @@
 package com.example.documentmanagementserver.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,6 +23,7 @@ public class Judge {
     @NotNull
     private String firstnameAndLastName;
 
+    @JsonIgnore
     @ManyToOne
     @ToString.Exclude
     private Court court;

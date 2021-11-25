@@ -1,5 +1,6 @@
 package com.example.documentmanagementserver.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,6 +24,7 @@ public class ProceedingsSubject {
     @NotNull
     private Boolean isMediationPossible;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "proceedingsSubject")
     @ToString.Exclude
     private Case aCase;

@@ -2,11 +2,14 @@ package com.example.documentmanagementserver.controllers;
 
 import com.example.documentmanagementserver.dtos.CaseForTable;
 import com.example.documentmanagementserver.models.Case;
+import com.example.documentmanagementserver.models.Judge;
 import com.example.documentmanagementserver.repositories.AddressRepository;
 import com.example.documentmanagementserver.repositories.CaseRepository;
+import com.example.documentmanagementserver.repositories.JudgeRepository;
 import com.example.documentmanagementserver.services.CaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +26,9 @@ public class CaseController {
 
     @Autowired
     private AddressRepository addressRepository;
+
+    @Autowired
+    private JudgeRepository judgeRepository;
 
     @Autowired
     private CaseService caseService;
@@ -57,11 +63,40 @@ public class CaseController {
     @PatchMapping("/case/status/{id}")
     public ResponseEntity<?> changeCaseStatus(@PathVariable(value = "id") int id, @RequestBody String status) {
         try {
-            Optional<Case> optCase = caseRepository.findById(id);
-            optCase.ifPresent(aCase -> {
-                aCase.setStatus(status);
-                caseRepository.save(aCase);
-            });
+            Case aCase = caseRepository.getById(id);
+            aCase.setStatus(status);
+            caseRepository.save(aCase);
+        } catch (Exception e) {
+            return new ResponseEntity<>(500, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>(200, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/case/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Optional<Case> getCase(@PathVariable(value = "id") int id) {
+        Optional<Case> aCase = caseRepository.findById(id);
+        return aCase;
+    }
+
+    @PutMapping("/case/update")
+    public ResponseEntity<Integer> updateCase(@RequestBody Case aCase) {
+        System.out.println(aCase.getCourt().getJudgingPanel());
+        Optional<Case> bCase = caseRepository.findById(aCase.getId());
+        if(bCase.isPresent()) {
+            for (Judge judge : bCase.get().getCourt().getJudgingPanel()
+            ) {
+                if(!aCase.getCourt().getJudgingPanel().contains(judge)) {
+                    System.out.println(judge);
+
+                    System.out.println("Halo?");
+                    judgeRepository.delete(judge.getId());
+                }
+            }
+        }
+        aCase.getCourt().addCourtToAllJudges();
+        try {
+            caseRepository.save(aCase);
         } catch (Exception e) {
             return new ResponseEntity<>(500, HttpStatus.INTERNAL_SERVER_ERROR);
         }

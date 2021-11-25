@@ -1,5 +1,6 @@
 package com.example.documentmanagementserver.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -34,6 +35,7 @@ public class Court {
     @NotNull
     private List<Judge> judgingPanel;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "court")
     @ToString.Exclude
     private Case aCase;
@@ -49,7 +51,7 @@ public class Court {
 
     public void addCourtToAllJudges() {
         for (Judge judge : this.judgingPanel
-             ) {
+        ) {
             judge.setCourt(this);
         }
     }

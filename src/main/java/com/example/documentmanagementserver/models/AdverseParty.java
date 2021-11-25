@@ -1,5 +1,6 @@
 package com.example.documentmanagementserver.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public class AdverseParty extends Client {
     @NotNull
     private AdversePartyAttorney adversePartyAttorney;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "adverseParty")
     @ToString.Exclude
     private Case aCase;

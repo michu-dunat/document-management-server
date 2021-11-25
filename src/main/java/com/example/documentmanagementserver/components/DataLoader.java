@@ -40,7 +40,7 @@ public class DataLoader implements ApplicationRunner {
 
         AdversePartyAttorney adversePartyAttorney1 = new AdversePartyAttorney("Michał Rosa", "666533256", address9, true, "Adwokat");
         AdverseParty adverseParty1 = new AdverseParty("Zuzanna Las", "95444440000",
-                "100-00-00-762", "567458123", "0013001563", "720340100",
+                "100-00-00-762", "567458123", "0013001563", "666256533",
                 "example@o2.com", address10, adversePartyAttorney1);
         Case aCase = new Case(client, adverseParty1, proceedingsSubject, court);
         caseRepository.save(aCase);

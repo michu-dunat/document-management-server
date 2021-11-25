@@ -1,5 +1,6 @@
 package com.example.documentmanagementserver.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,6 +32,7 @@ public class AdversePartyAttorney {
     @OneToOne(cascade = {CascadeType.ALL})
     private Address mailingAddress;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "adversePartyAttorney")
     @ToString.Exclude
     private AdverseParty adverseParty;
