@@ -29,7 +29,7 @@ public class AdversePartyAttorney {
     private Boolean isAttorneyProfessional;
     @NotNull
     private String jobTitle;
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne(cascade = {CascadeType.ALL}, orphanRemoval = true)
     private Address mailingAddress;
 
     @JsonIgnore

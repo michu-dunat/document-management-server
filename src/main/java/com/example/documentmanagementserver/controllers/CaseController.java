@@ -1,6 +1,7 @@
 package com.example.documentmanagementserver.controllers;
 
 import com.example.documentmanagementserver.dtos.CaseForTable;
+import com.example.documentmanagementserver.models.Address;
 import com.example.documentmanagementserver.models.Case;
 import com.example.documentmanagementserver.models.Judge;
 import com.example.documentmanagementserver.repositories.AddressRepository;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -82,6 +84,16 @@ public class CaseController {
 
     @PutMapping("/case/update")
     public ResponseEntity<Integer> updateCase(@RequestBody Case aCase) {
+//        System.out.println(aCase.getClient());
+//        if(Objects.equals(aCase.getClient().getMailingAddress().getCity(), "-1")) {
+//            Address addressToBeRemoved = aCase.getClient().getMailingAddress();
+//            aCase.getClient().setMailingAddress(null);
+//            int idToDelete = aCase.getClient().getMailingAddress().getId();
+//            Address address= aCase.getClient().getMailingAddress();
+//            aCase.getClient().setMailingAddress(null);
+//            address.setClientMailingAddress(null);
+//            addressRepository.deleteById(idToDelete);
+//        }
         judgeRepository.deleteAllByCourt(aCase.getCourt());
         aCase.getCourt().addCourtToAllJudges();
         try {

@@ -36,7 +36,7 @@ public class Client {
     @OneToOne(cascade = {CascadeType.ALL})
     @NotNull
     private Address residenceOrRegisteredOfficeAddress;
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne(cascade = {CascadeType.ALL}, orphanRemoval = true)
     private Address mailingAddress;
 
     @JsonIgnore

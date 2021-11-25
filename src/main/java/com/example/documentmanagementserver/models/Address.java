@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -57,5 +58,14 @@ public class Address {
         this.postcode = postcode;
         this.street = street;
         this.buildingNumber = buildingNumber;
+    }
+
+    public boolean checkIfShouldBeRemoved() {
+        if(Objects.equals(this.city, "-1") && Objects.equals(this.postcode, "-1") &&
+                Objects.equals(this.street, "-1") && Objects.equals(this.buildingNumber, "-1") &&
+                Objects.equals(this.apartmentNumber, "-1")) {
+            return true;
+        }
+        return false;
     }
 }
