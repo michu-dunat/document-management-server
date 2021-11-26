@@ -28,7 +28,8 @@ public class DataLoader implements ApplicationRunner {
         List<Judge> judges = new ArrayList<>();
         judges.add(judge);
         judges.add(judge1);
-        Court court = new Court("Rejonowy", address1, "4", "123456789", "o2g50b0uoy", judges);
+        Court court = new Court("Rejonowy", address1, "4", "123456789",
+                "o2g50b0uoy", "court@examole.com", "IP AX/Cd 670", judges);
         court.addCourtToAllJudges();
         ProceedingsSubject proceedingsSubject = new ProceedingsSubject("1000ZŁ", true);
         Date date = Date.valueOf("2021-11-15");
@@ -70,7 +71,8 @@ public class DataLoader implements ApplicationRunner {
         judges1.add(judge3);
         judges1.add(judge4);
         judges1.add(judge5);
-        Court court1 = new Court("Okręgowy", address4, "2", "583065334", "5oy0bo2g0u", judges1);
+        Court court1 = new Court("Okręgowy", address4, "2", "583065334",
+                "5oy0bo2g0u", "example@court.com","ŁI ŁE/Ło 69",judges1);
         court1.addCourtToAllJudges();
 
         ProceedingsSubject proceedingsSubject1 = new ProceedingsSubject("2000ZŁ", false);
