@@ -1,9 +1,11 @@
 package com.example.documentmanagementserver.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Getter
@@ -29,9 +31,12 @@ public class Case {
     @OneToOne(cascade = {CascadeType.ALL})
     @NotNull
     private Court court;
-
     @NotNull
     private String status;
+
+    @JsonIgnore
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "aCase")
+    List<Document> caseDocuments;
 
     public Case(Client client, AdverseParty adverseParty, ProceedingsSubject proceedingsSubject, Court court) {
         this.client = client;
