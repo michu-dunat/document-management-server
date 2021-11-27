@@ -35,7 +35,7 @@ public class Case {
     private String status;
 
     @JsonIgnore
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "aCase")
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "documentCase")
     List<Document> caseDocuments;
 
     public Case(Client client, AdverseParty adverseParty, ProceedingsSubject proceedingsSubject, Court court) {

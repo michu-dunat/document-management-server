@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.sql.Date;
 
 @Entity
 @Getter
@@ -35,9 +36,19 @@ public class Document {
     private Boolean isResponseRequired;
     private java.sql.Date deadlineForResponse;
 
-
     @JsonIgnore
     @ManyToOne
     @ToString.Exclude
-    private Case aCase;
+    @JoinColumn(name="case_id")
+    private Case documentCase;
+
+    public Document(String type, String addresseeOrSender, Boolean isIncoming, Date dateOfReceiptOrDispatch, @NotNull byte[] file, Boolean isResponseRequired, Date deadlineForResponse) {
+        this.type = type;
+        this.addresseeOrSender = addresseeOrSender;
+        this.isIncoming = isIncoming;
+        this.dateOfReceiptOrDispatch = dateOfReceiptOrDispatch;
+        this.file = file;
+        this.isResponseRequired = isResponseRequired;
+        this.deadlineForResponse = deadlineForResponse;
+    }
 }

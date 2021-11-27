@@ -2,11 +2,15 @@ package com.example.documentmanagementserver.components;
 
 import com.example.documentmanagementserver.models.*;
 import com.example.documentmanagementserver.repositories.CaseRepository;
+import com.example.documentmanagementserver.repositories.DocumentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +20,9 @@ public class DataLoader implements ApplicationRunner {
 
     @Autowired
     private CaseRepository caseRepository;
+
+    @Autowired
+    private DocumentRepository documentRepository;
 
     public void run(ApplicationArguments args) {
         Address address = new Address("Tychy", "43-100", "Budowlanych", "170");
@@ -88,5 +95,23 @@ public class DataLoader implements ApplicationRunner {
 
         Case aCase1 = new Case(client1, adverseParty, proceedingsSubject1, court1);
         caseRepository.save(aCase1);
+        byte[] fileByteArray = null;
+        byte[] fileByteArray1 = null;
+        try {
+            fileByteArray = Files.readAllBytes(Paths.get("src/main/resources/Specjalnosciowe_1_slajdy_dysk.pdf"));
+            fileByteArray1 = Files.readAllBytes(Paths.get("src/main/resources/Specjalnosciowe_1_tekst_dysk.pdf"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Document document = new Document("Wniosek o wszczęcie postępowania nieprocesowego", "Maspex",
+                false, Date.valueOf("2021-11-15"), fileByteArray, false, null);
+        Document document1 = new Document("Wniosek o wszczęcie egzekucji", "Michał Dunat",
+                true, Date.valueOf("2021-11-16"), fileByteArray1, true, Date.valueOf("2021-11-20"));
+
+        document.setDocumentCase(aCase);
+        document1.setDocumentCase(aCase);
+
+        documentRepository.save(document);
+        documentRepository.save(document1);
     }
 }
