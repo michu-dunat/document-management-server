@@ -43,4 +43,15 @@ public class DocumentController {
     public List<Document> getAllDocumentForCase(@PathVariable int caseId) {
         return documentRepository.findAllByDocumentCase_Id(caseId);
     }
+
+    @DeleteMapping("/document/delete/{documentId}")
+    public ResponseEntity<Integer> deleteDocument(@PathVariable int documentId) {
+        try {
+            documentRepository.deleteById(documentId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(500, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>(200, HttpStatus.OK);
+    }
 }
