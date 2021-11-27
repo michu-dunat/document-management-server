@@ -26,16 +26,17 @@ public class DocumentController {
     @PostMapping("/document/add/{caseId}")
     public ResponseEntity<Integer> addDocument(@PathVariable int caseId, @RequestBody Document document) {
         Optional<Case> aCase = caseRepository.findById(caseId);
+        Document savedDocument;
         if (aCase.isPresent()) {
             document.setDocumentCase(aCase.get());
         }
 
         try {
-            documentRepository.save(document);
+            savedDocument = documentRepository.save(document);
         } catch (Exception e) {
             return new ResponseEntity<>(500, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(200, HttpStatus.OK);
+        return new ResponseEntity<>(savedDocument.getId(), HttpStatus.OK);
     }
 
     @GetMapping("/document/list/{caseId}")
