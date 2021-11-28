@@ -32,6 +32,9 @@ public class Document {
     @Lob
     @NotNull
     byte[] file;
+    @NotNull
+    private String fileName;
+
 
     private Boolean isResponseRequired;
     private java.sql.Date deadlineForResponse;
@@ -42,7 +45,8 @@ public class Document {
     @JoinColumn(name="case_id")
     private Case documentCase;
 
-    public Document(String type, String addresseeOrSender, Boolean isIncoming, Date dateOfReceiptOrDispatch, @NotNull byte[] file, Boolean isResponseRequired, Date deadlineForResponse) {
+    public Document(String type, String addresseeOrSender, Boolean isIncoming, Date dateOfReceiptOrDispatch,
+                    @NotNull byte[] file, Boolean isResponseRequired, Date deadlineForResponse, String fileName) {
         this.type = type;
         this.addresseeOrSender = addresseeOrSender;
         this.isIncoming = isIncoming;
@@ -50,5 +54,6 @@ public class Document {
         this.file = file;
         this.isResponseRequired = isResponseRequired;
         this.deadlineForResponse = deadlineForResponse;
+        this.fileName = fileName;
     }
 }

@@ -104,9 +104,11 @@ public class DataLoader implements ApplicationRunner {
             e.printStackTrace();
         }
         Document document = new Document("Wniosek o wszczęcie postępowania nieprocesowego", "Maspex",
-                false, Date.valueOf("2021-11-15"), fileByteArray, false, null);
+                false, Date.valueOf("2021-11-15"), fileByteArray, false, null,
+                "Specjalnosciowe_1_slajdy_dysk.pdf");
         Document document1 = new Document("Wniosek o wszczęcie egzekucji", "Michał Dunat",
-                true, Date.valueOf("2021-11-16"), fileByteArray1, true, Date.valueOf("2021-11-20"));
+                true, Date.valueOf("2021-11-16"), fileByteArray1, true,
+                Date.valueOf("2021-11-20"), "Specjalnosciowe_1_tekst_dysk.pdf");
 
         document.setDocumentCase(aCase);
         document1.setDocumentCase(aCase);
