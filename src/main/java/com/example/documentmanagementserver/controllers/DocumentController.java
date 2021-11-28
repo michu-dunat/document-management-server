@@ -55,4 +55,17 @@ public class DocumentController {
         }
         return new ResponseEntity<>(200, HttpStatus.OK);
     }
+
+    @PutMapping("/document/update")
+    public ResponseEntity<Integer> updateDocument(@RequestBody Document document) {
+        try {
+            document.setDocumentCase(documentRepository.findById(document.getId()).get().getDocumentCase());
+            documentRepository.save(document);
+        } catch (Exception e) {
+            return new ResponseEntity<>(500, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>(200, HttpStatus.OK);
+    }
 }
+
+
