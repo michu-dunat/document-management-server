@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,6 +66,14 @@ public class DocumentController {
             return new ResponseEntity<>(500, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<>(200, HttpStatus.OK);
+    }
+
+    @GetMapping("/document/file/{documentId}")
+    @ResponseBody
+    public  HashMap<String, byte[]> getFile(@PathVariable int documentId) {
+        HashMap<String, byte[]> map = new HashMap<>();
+        map.put("file", documentRepository.findById(documentId).get().getFile());
+        return map;
     }
 }
 

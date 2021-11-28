@@ -1,6 +1,7 @@
 package com.example.documentmanagementserver.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,10 +18,13 @@ import java.sql.Date;
 @ToString
 public class Document {
 
+    @Lob
+    @NotNull
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    byte[] file;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     @NotNull
     private String type;
     @NotNull
@@ -29,9 +33,6 @@ public class Document {
     private Boolean isIncoming;
     @NotNull
     private java.sql.Date dateOfReceiptOrDispatch;
-    @Lob
-    @NotNull
-    byte[] file;
     @NotNull
     private String fileName;
 
@@ -42,7 +43,7 @@ public class Document {
     @JsonIgnore
     @ManyToOne
     @ToString.Exclude
-    @JoinColumn(name="case_id")
+    @JoinColumn(name = "case_id")
     private Case documentCase;
 
     public Document(String type, String addresseeOrSender, Boolean isIncoming, Date dateOfReceiptOrDispatch,
