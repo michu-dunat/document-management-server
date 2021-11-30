@@ -1,17 +1,21 @@
 package com.example.documentmanagementserver.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString(callSuper=true)
+@ToString(callSuper = true)
 public class AdverseParty extends Client {
 
     @OneToOne(cascade = {CascadeType.ALL})

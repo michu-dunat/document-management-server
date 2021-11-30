@@ -79,7 +79,7 @@ public class DataLoader implements ApplicationRunner {
         judges1.add(judge4);
         judges1.add(judge5);
         Court court1 = new Court("Okręgowy", address4, "2", "583065334",
-                "5oy0bo2g0u", "example@court.com","ŁI ŁE/Ło 69",judges1);
+                "5oy0bo2g0u", "example@court.com", "ŁI ŁE/Ło 69", judges1);
         court1.addCourtToAllJudges();
 
         ProceedingsSubject proceedingsSubject1 = new ProceedingsSubject("2000ZŁ", false);

@@ -1,9 +1,7 @@
 package com.example.documentmanagementserver.controllers;
 
 import com.example.documentmanagementserver.dtos.CaseForTable;
-import com.example.documentmanagementserver.models.Address;
 import com.example.documentmanagementserver.models.Case;
-import com.example.documentmanagementserver.models.Judge;
 import com.example.documentmanagementserver.repositories.AddressRepository;
 import com.example.documentmanagementserver.repositories.CaseRepository;
 import com.example.documentmanagementserver.repositories.JudgeRepository;
@@ -15,9 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Controller

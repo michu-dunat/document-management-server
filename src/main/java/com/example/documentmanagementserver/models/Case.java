@@ -1,7 +1,10 @@
 package com.example.documentmanagementserver.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -15,10 +18,12 @@ import java.util.List;
 @Table(name = "t_case")
 public class Case {
 
+    @JsonIgnore
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "documentCase")
+    List<Document> caseDocuments;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     @OneToOne(cascade = {CascadeType.ALL})
     @NotNull
     private Client client;
@@ -33,10 +38,6 @@ public class Case {
     private Court court;
     @NotNull
     private String status;
-
-    @JsonIgnore
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "documentCase")
-    List<Document> caseDocuments;
 
     public Case(Client client, AdverseParty adverseParty, ProceedingsSubject proceedingsSubject, Court court) {
         this.client = client;

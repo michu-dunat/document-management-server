@@ -20,7 +20,7 @@ public class CaseService {
         ArrayList<Case> cases = (ArrayList<Case>) caseRepository.findAll();
         ArrayList<CaseForTable> casesForTable = new ArrayList<>();
         for (Case aCase : cases
-             ) {
+        ) {
             String label = aCase.getClient().getFirstnameAndLastNameOrCompanyName() + " kontra "
                     + aCase.getAdverseParty().getFirstnameAndLastNameOrCompanyName();
             Date fillingOrClaimingDate = null;

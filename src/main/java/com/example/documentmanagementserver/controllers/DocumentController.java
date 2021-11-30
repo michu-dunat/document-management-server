@@ -62,7 +62,7 @@ public class DocumentController {
         try {
             Document documentInDatabase = documentRepository.findById(document.getId()).get();
             document.setDocumentCase(documentInDatabase.getDocumentCase());
-            if(document.getFile() == null) {
+            if (document.getFile() == null) {
                 document.setFile(documentInDatabase.getFile());
             }
             documentRepository.save(document);
@@ -75,7 +75,7 @@ public class DocumentController {
 
     @GetMapping("/document/file/{documentId}")
     @ResponseBody
-    public  HashMap<String, byte[]> getFile(@PathVariable int documentId) {
+    public HashMap<String, byte[]> getFile(@PathVariable int documentId) {
         HashMap<String, byte[]> map = new HashMap<>();
         map.put("file", documentRepository.findById(documentId).get().getFile());
         return map;
