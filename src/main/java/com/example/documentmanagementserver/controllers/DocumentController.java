@@ -60,9 +60,14 @@ public class DocumentController {
     @PutMapping("/document/update")
     public ResponseEntity<Integer> updateDocument(@RequestBody Document document) {
         try {
-            document.setDocumentCase(documentRepository.findById(document.getId()).get().getDocumentCase());
+            Document documentInDatabase = documentRepository.findById(document.getId()).get();
+            document.setDocumentCase(documentInDatabase.getDocumentCase());
+            if(document.getFile() == null) {
+                document.setFile(documentInDatabase.getFile());
+            }
             documentRepository.save(document);
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(500, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<>(200, HttpStatus.OK);
