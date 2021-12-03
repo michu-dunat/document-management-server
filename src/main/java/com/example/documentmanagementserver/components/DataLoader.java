@@ -3,6 +3,7 @@ package com.example.documentmanagementserver.components;
 import com.example.documentmanagementserver.models.*;
 import com.example.documentmanagementserver.repositories.CaseRepository;
 import com.example.documentmanagementserver.repositories.DocumentRepository;
+import com.example.documentmanagementserver.repositories.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -23,6 +24,9 @@ public class DataLoader implements ApplicationRunner {
 
     @Autowired
     private DocumentRepository documentRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     public void run(ApplicationArguments args) {
         Address address = new Address("Tychy", "43-100", "Budowlanych", "170");
@@ -115,5 +119,10 @@ public class DataLoader implements ApplicationRunner {
 
         documentRepository.save(document);
         documentRepository.save(document1);
+
+        Role role1 = new Role("ROLE_ADMIN", "Administrator");
+        Role role2 = new Role("ROLE_USER", "Użytkownik");
+        roleRepository.save(role1);
+        roleRepository.save(role2);
     }
 }
