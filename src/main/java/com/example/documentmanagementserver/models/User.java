@@ -30,4 +30,11 @@ public class User {
 
     @ManyToOne
     private Role role;
+
+    public User(String firstnameAndLastName, String emailAddress, String password, Role role) {
+        this.firstnameAndLastName = firstnameAndLastName;
+        this.emailAddress = emailAddress;
+        this.password = password;
+        this.role = role;
+    }
 }

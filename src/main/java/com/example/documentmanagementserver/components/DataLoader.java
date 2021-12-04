@@ -4,6 +4,7 @@ import com.example.documentmanagementserver.models.*;
 import com.example.documentmanagementserver.repositories.CaseRepository;
 import com.example.documentmanagementserver.repositories.DocumentRepository;
 import com.example.documentmanagementserver.repositories.RoleRepository;
+import com.example.documentmanagementserver.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -27,6 +28,9 @@ public class DataLoader implements ApplicationRunner {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public void run(ApplicationArguments args) {
         Address address = new Address("Tychy", "43-100", "Budowlanych", "170");
@@ -124,5 +128,10 @@ public class DataLoader implements ApplicationRunner {
         Role role2 = new Role("ROLE_USER", "Użytkownik");
         roleRepository.save(role1);
         roleRepository.save(role2);
+
+        User user1 = new User("Michał Dunat", "michu@gmail.com", "fo205df0g87ab37k4bd2c9n0cf151o4400b0d85d562s61eccfdbbbaf5n083cf0hd6ae54fd9081dz873dc9l2351f6v50dea1lcbe208w85eff6jf9fb3fg59831fj8d915ei63d883j53e5fcc73", role1);
+        User user2 = new User("Aleksandra Dunat", "ola@gmail.com", "fo205df0g87ab37k4bd2c9n0cf151o4400b0d85d562s61eccfdbbbaf5n083cf0hd6ae54fd9081dz873dc9l2351f6v50dea1lcbe208w85eff6jf9fb3fg59831fj8d915ei63d883j53e5fcc73", role2);
+        userRepository.save(user1);
+        userRepository.save(user2);
     }
 }
