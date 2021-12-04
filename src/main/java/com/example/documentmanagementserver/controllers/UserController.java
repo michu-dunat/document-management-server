@@ -54,6 +54,9 @@ public class UserController {
 
     @PutMapping("/user/update")
     public ResponseEntity<Integer> updateCase(@RequestBody User user) {
+        if(user.getPassword() == "") {
+            user.setPassword(userRepository.findById(user.getId()).get().getPassword());
+        }
         try {
             userRepository.save(user);
         } catch (Exception e) {
