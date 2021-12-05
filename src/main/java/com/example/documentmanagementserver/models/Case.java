@@ -20,6 +20,7 @@ public class Case {
 
     @JsonIgnore
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "documentCase")
+    @ToString.Exclude
     List<Document> caseDocuments;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

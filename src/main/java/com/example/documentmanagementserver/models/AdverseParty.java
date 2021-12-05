@@ -25,7 +25,7 @@ public class AdverseParty extends Client {
     @JsonIgnore
     @OneToOne(mappedBy = "adverseParty")
     @ToString.Exclude
-    private Case aCase;
+    private Case bCase;
 
     public AdverseParty(String firstnameAndLastNameOrCompanyName, String pesel, String nip, String regon, String krs, String phoneNumber, String emailAddress, Address residenceOrRegisteredOfficeAddress, AdversePartyAttorney adversePartyAttorney) {
         super(firstnameAndLastNameOrCompanyName, pesel, nip, regon, krs, phoneNumber, emailAddress, residenceOrRegisteredOfficeAddress);

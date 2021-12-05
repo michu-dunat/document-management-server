@@ -22,7 +22,7 @@ public class Client {
     private int id;
 
     @NotNull
-    private String firstnameAndLastNameOrCompanyName;
+    private String firstNameLastNameCompanyName;
     @NotNull
     private String pesel;
     @NotNull
@@ -46,8 +46,8 @@ public class Client {
     @ToString.Exclude
     private Case aCase;
 
-    public Client(String firstnameAndLastNameOrCompanyName, String pesel, String nip, String regon, String krs, String phoneNumber, String emailAddress, Address residenceOrRegisteredOfficeAddress) {
-        this.firstnameAndLastNameOrCompanyName = firstnameAndLastNameOrCompanyName;
+    public Client(String firstNameLastNameCompanyName, String pesel, String nip, String regon, String krs, String phoneNumber, String emailAddress, Address residenceOrRegisteredOfficeAddress) {
+        this.firstNameLastNameCompanyName = firstNameLastNameCompanyName;
         this.pesel = pesel;
         this.nip = nip;
         this.regon = regon;

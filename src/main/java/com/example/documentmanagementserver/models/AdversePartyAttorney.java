@@ -21,7 +21,7 @@ public class AdversePartyAttorney {
     private int id;
 
     @NotNull
-    private String firstnameAndLastName;
+    private String firstNameLastName;
     @NotNull
     private String phoneNumber;
     @OneToOne(cascade = {CascadeType.ALL})
@@ -39,8 +39,8 @@ public class AdversePartyAttorney {
     @ToString.Exclude
     private AdverseParty adverseParty;
 
-    public AdversePartyAttorney(String firstnameAndLastName, String phoneNumber, Address residenceOrRegisteredOfficeAddress, Boolean isAttorneyProfessional, String jobTitle) {
-        this.firstnameAndLastName = firstnameAndLastName;
+    public AdversePartyAttorney(String firstNameLastName, String phoneNumber, Address residenceOrRegisteredOfficeAddress, Boolean isAttorneyProfessional, String jobTitle) {
+        this.firstNameLastName = firstNameLastName;
         this.phoneNumber = phoneNumber;
         this.residenceOrRegisteredOfficeAddress = residenceOrRegisteredOfficeAddress;
         this.isAttorneyProfessional = isAttorneyProfessional;

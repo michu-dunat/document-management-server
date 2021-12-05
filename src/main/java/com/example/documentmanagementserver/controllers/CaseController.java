@@ -89,4 +89,10 @@ public class CaseController {
         }
         return new ResponseEntity<>(200, HttpStatus.OK);
     }
+
+    @GetMapping("test/{input}")
+    @ResponseBody
+    public List<CaseForTable> test(@PathVariable String input) {
+        return caseService.getAllCasesForSearch(input);
+    }
 }

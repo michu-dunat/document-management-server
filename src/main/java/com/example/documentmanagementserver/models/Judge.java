@@ -21,14 +21,14 @@ public class Judge {
     private int id;
 
     @NotNull
-    private String firstnameAndLastName;
+    private String firstNameLastName;
 
     @JsonIgnore
     @ManyToOne
     @ToString.Exclude
     private Court court;
 
-    public Judge(String firstnameAndLastName) {
-        this.firstnameAndLastName = firstnameAndLastName;
+    public Judge(String firstNameLastName) {
+        this.firstNameLastName = firstNameLastName;
     }
 }
