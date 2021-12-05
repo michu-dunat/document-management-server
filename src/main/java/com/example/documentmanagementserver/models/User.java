@@ -21,7 +21,7 @@ public class User {
     private int id;
 
     @NotNull
-    private String firstnameAndLastName;
+    private String firstNameLastName;
     @NotNull
     @Column(unique = true)
     private String emailAddress;
@@ -31,8 +31,8 @@ public class User {
     @ManyToOne
     private Role role;
 
-    public User(String firstnameAndLastName, String emailAddress, String password, Role role) {
-        this.firstnameAndLastName = firstnameAndLastName;
+    public User(String firstNameLastName, String emailAddress, String password, Role role) {
+        this.firstNameLastName = firstNameLastName;
         this.emailAddress = emailAddress;
         this.password = password;
         this.role = role;
