@@ -129,8 +129,8 @@ public class DataLoader implements ApplicationRunner {
         roleRepository.save(role1);
         roleRepository.save(role2);
 
-        User user1 = new User("Michał Dunat", "michu@gmail.com", "fo205df0g87ab37k4bd2c9n0cf151o4400b0d85d562s61eccfdbbbaf5n083cf0hd6ae54fd9081dz873dc9l2351f6v50dea1lcbe208w85eff6jf9fb3fg59831fj8d915ei63d883j53e5fcc73", role1);
-        User user2 = new User("Aleksandra Dunat", "ola@gmail.com", "fo205df0g87ab37k4bd2c9n0cf151o4400b0d85d562s61eccfdbbbaf5n083cf0hd6ae54fd9081dz873dc9l2351f6v50dea1lcbe208w85eff6jf9fb3fg59831fj8d915ei63d883j53e5fcc73", role2);
+        User user1 = new User("Michał Dunat", "michu@gmail.com", "338c91d5a2cb5f2ebcb77023342a9ef48e0bdfc5725034b9edf5f6df09fa2ed683ed2d25c061716886cba647ecb9f7881a14dc056fb57fae350863c058935c20", role1);
+        User user2 = new User("Aleksandra Dunat", "ola@gmail.com", "338c91d5a2cb5f2ebcb77023342a9ef48e0bdfc5725034b9edf5f6df09fa2ed683ed2d25c061716886cba647ecb9f7881a14dc056fb57fae350863c058935c20", role2);
         userRepository.save(user1);
         userRepository.save(user2);
     }

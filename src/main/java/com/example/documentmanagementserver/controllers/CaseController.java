@@ -6,7 +6,7 @@ import com.example.documentmanagementserver.repositories.AddressRepository;
 import com.example.documentmanagementserver.repositories.CaseRepository;
 import com.example.documentmanagementserver.repositories.JudgeRepository;
 import com.example.documentmanagementserver.services.CaseService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,21 +16,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Controller
 @CrossOrigin(origins = "http://localhost:4200")
 public class CaseController {
 
-    @Autowired
-    private CaseRepository caseRepository;
-
-    @Autowired
-    private AddressRepository addressRepository;
-
-    @Autowired
-    private JudgeRepository judgeRepository;
-
-    @Autowired
-    private CaseService caseService;
+    private final CaseRepository caseRepository;
+    private final AddressRepository addressRepository;
+    private final JudgeRepository judgeRepository;
+    private final CaseService caseService;
 
     @PostMapping("/case/add")
     public ResponseEntity<Integer> addCase(@RequestBody Case aCase) {
