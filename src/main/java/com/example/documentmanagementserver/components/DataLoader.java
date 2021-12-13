@@ -5,7 +5,7 @@ import com.example.documentmanagementserver.repositories.CaseRepository;
 import com.example.documentmanagementserver.repositories.DocumentRepository;
 import com.example.documentmanagementserver.repositories.RoleRepository;
 import com.example.documentmanagementserver.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,23 +18,15 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Component
 public class DataLoader implements ApplicationRunner {
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private CaseRepository caseRepository;
-
-    @Autowired
-    private DocumentRepository documentRepository;
-
-    @Autowired
-    private RoleRepository roleRepository;
-
-    @Autowired
-    private UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final CaseRepository caseRepository;
+    private final DocumentRepository documentRepository;
+    private final RoleRepository roleRepository;
+    private final UserRepository userRepository;
 
     public void run(ApplicationArguments args) {
         Address address = new Address("Tychy", "43-100", "Budowlanych", "170");

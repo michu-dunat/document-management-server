@@ -4,7 +4,7 @@ import com.example.documentmanagementserver.models.Case;
 import com.example.documentmanagementserver.models.Document;
 import com.example.documentmanagementserver.repositories.CaseRepository;
 import com.example.documentmanagementserver.repositories.DocumentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,15 +14,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Controller
 @CrossOrigin(origins = "http://localhost:4200")
 public class DocumentController {
-
-    @Autowired
-    DocumentRepository documentRepository;
-
-    @Autowired
-    CaseRepository caseRepository;
+    private final DocumentRepository documentRepository;
+    private final CaseRepository caseRepository;
 
     @PostMapping("/document/add/{caseId}")
     public ResponseEntity<Integer> addDocument(@PathVariable int caseId, @RequestBody Document document) {

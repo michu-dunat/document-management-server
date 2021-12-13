@@ -1,10 +1,8 @@
 package com.example.documentmanagementserver.controllers;
 
-import com.example.documentmanagementserver.dtos.CaseForTable;
-import com.example.documentmanagementserver.models.Case;
 import com.example.documentmanagementserver.models.User;
 import com.example.documentmanagementserver.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +12,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Controller
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
-
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @PostMapping("/user/add")
     public ResponseEntity<Integer> addCase(@RequestBody User user) {
@@ -36,7 +33,7 @@ public class UserController {
     public List<User> getUsers() {
         List<User> users = userRepository.findAll();
         for (User user : users
-             ) {
+        ) {
             user.setPassword("");
         }
         return users;
@@ -54,7 +51,7 @@ public class UserController {
 
     @PutMapping("/user/update")
     public ResponseEntity<Integer> updateCase(@RequestBody User user) {
-        if(user.getPassword() == "") {
+        if (user.getPassword() == "") {
             user.setPassword(userRepository.findById(user.getId()).get().getPassword());
         }
         try {
@@ -69,7 +66,7 @@ public class UserController {
     @ResponseBody
     public Optional<User> getUser(@PathVariable(value = "id") int id) {
         Optional<User> user = userRepository.findById(id);
-        if(user.isPresent()) user.get().setPassword("");
+        if (user.isPresent()) user.get().setPassword("");
         return user;
     }
 }
