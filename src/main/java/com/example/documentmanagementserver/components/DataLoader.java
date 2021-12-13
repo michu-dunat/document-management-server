@@ -8,6 +8,7 @@ import com.example.documentmanagementserver.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -19,6 +20,9 @@ import java.util.List;
 
 @Component
 public class DataLoader implements ApplicationRunner {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private CaseRepository caseRepository;
@@ -129,8 +133,8 @@ public class DataLoader implements ApplicationRunner {
         roleRepository.save(role1);
         roleRepository.save(role2);
 
-        User user1 = new User("Michał Dunat", "michu@gmail.com", "338c91d5a2cb5f2ebcb77023342a9ef48e0bdfc5725034b9edf5f6df09fa2ed683ed2d25c061716886cba647ecb9f7881a14dc056fb57fae350863c058935c20", role1);
-        User user2 = new User("Aleksandra Dunat", "ola@gmail.com", "338c91d5a2cb5f2ebcb77023342a9ef48e0bdfc5725034b9edf5f6df09fa2ed683ed2d25c061716886cba647ecb9f7881a14dc056fb57fae350863c058935c20", role2);
+        User user1 = new User("Michał Dunat", "michu@gmail.com", passwordEncoder.encode("Useruseruser1"), role1);
+        User user2 = new User("Aleksandra Dunat", "ola@gmail.com", passwordEncoder.encode("Useruseruser1"), role2);
         userRepository.save(user1);
         userRepository.save(user2);
     }
