@@ -6,10 +6,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -17,9 +19,10 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @PostMapping("/user/add")
-    public ResponseEntity<Integer> addCase(@RequestBody User user) {
+    public ResponseEntity<Integer> addUser(@RequestBody User user) {
         try {
             userRepository.save(user);
         } catch (Exception e) {
@@ -40,7 +43,14 @@ public class UserController {
     }
 
     @DeleteMapping("/user/delete/{id}")
-    public ResponseEntity<Integer> deleteCase(@PathVariable(value = "id") int id) {
+    public ResponseEntity<Integer> deleteUser(@PathVariable(value = "id") int id) {
+        User user = userRepository.findById(id).get();
+        if(Objects.equals(user.getRole().getCode(), "ROLE_ADMIN")) {
+            if(userRepository.countAllByRole(user.getRole()) <= 1) {
+                return new ResponseEntity<>(500, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+
         try {
             userRepository.deleteById(id);
         } catch (Exception e) {
@@ -53,6 +63,8 @@ public class UserController {
     public ResponseEntity<Integer> updateCase(@RequestBody User user) {
         if (user.getPassword() == "") {
             user.setPassword(userRepository.findById(user.getId()).get().getPassword());
+        } else {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
         try {
             userRepository.save(user);

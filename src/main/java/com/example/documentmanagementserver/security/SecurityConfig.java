@@ -20,6 +20,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic().and().authorizeRequests()
                 .antMatchers("/login").permitAll()
+                .antMatchers("/user/*").hasAnyRole("ADMIN")
+                .antMatchers("/role").hasAnyRole("ADMIN")
                 .antMatchers("/**").hasAnyRole("ADMIN", "USER")
                 .and().cors().and().csrf().disable();
     }

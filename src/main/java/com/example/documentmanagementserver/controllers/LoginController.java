@@ -23,10 +23,10 @@ public class LoginController {
 
     @RequestMapping("/login")
     public ResponseEntity<Role> login(@RequestBody LoginCredentials loginCredentials) {
-        User user1 = userRepository.findByEmailAddress(loginCredentials.getEmailAddress());
-        if(passwordEncoder.matches(loginCredentials.getPassword(), user1.getPassword())) {
-            return new ResponseEntity<>(user1.getRole(), HttpStatus.OK);
+        User user = userRepository.findByEmailAddress(loginCredentials.getEmailAddress());
+        if(user == null || !passwordEncoder.matches(loginCredentials.getPassword(), user.getPassword())) {
+            return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
         }
-        return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(user.getRole(), HttpStatus.OK);
     }
 }
