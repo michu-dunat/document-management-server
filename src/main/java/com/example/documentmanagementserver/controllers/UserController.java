@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -45,6 +47,18 @@ public class UserController {
     @DeleteMapping("/user/delete/{id}")
     public ResponseEntity<Integer> deleteUser(@PathVariable(value = "id") int id) {
         User user = userRepository.findById(id).get();
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = "";
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        if(Objects.equals(user.getEmailAddress(), username)) {
+            return new ResponseEntity<>(500, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
         if(Objects.equals(user.getRole().getCode(), "ROLE_ADMIN")) {
             if(userRepository.countAllByRole(user.getRole()) <= 1) {
                 return new ResponseEntity<>(500, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -60,9 +74,28 @@ public class UserController {
     }
 
     @PutMapping("/user/update")
-    public ResponseEntity<Integer> updateCase(@RequestBody User user) {
-        if (user.getPassword() == "") {
-            user.setPassword(userRepository.findById(user.getId()).get().getPassword());
+    public ResponseEntity<Integer> updateUser(@RequestBody User user) {
+        User userSavedInDatabase = userRepository.findById(user.getId()).get();
+
+        if(Objects.equals(user.getRole().getCode(), "ROLE_USER") && Objects.equals(userSavedInDatabase.getRole().getCode(), "ROLE_ADMIN")) {
+            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            String username = "";
+            if (principal instanceof UserDetails) {
+                username = ((UserDetails)principal).getUsername();
+            } else {
+                username = principal.toString();
+            }
+            if(Objects.equals(user.getEmailAddress(), username)) {
+                return new ResponseEntity<>(500, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+            if(userRepository.countAllByRole(userSavedInDatabase.getRole()) <= 1) {
+                return new ResponseEntity<>(500, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+
+        if (Objects.equals(user.getPassword(), "")) {
+            user.setPassword(userSavedInDatabase.getPassword());
         } else {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
