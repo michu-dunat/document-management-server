@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -45,6 +46,12 @@ public class CaseController {
 
     @DeleteMapping("/case/delete/{id}")
     public ResponseEntity<Integer> deleteCase(@PathVariable(value = "id") int id) {
+        Optional<Case> aCase = caseRepository.findById(id);
+        if(aCase.isPresent()) {
+            if (Objects.equals(aCase.get().getStatus(), "Zakończona")) {
+                return new ResponseEntity<>(500, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
         try {
             caseRepository.deleteById(id);
         } catch (Exception e) {
@@ -74,6 +81,9 @@ public class CaseController {
 
     @PutMapping("/case/update")
     public ResponseEntity<Integer> updateCase(@RequestBody Case aCase) {
+        if (Objects.equals(aCase.getStatus(), "Zakończona")) {
+            return new ResponseEntity<>(500, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
         judgeRepository.deleteAllByCourt(aCase.getCourt());
         aCase.getCourt().addCourtToAllJudges();
         try {
