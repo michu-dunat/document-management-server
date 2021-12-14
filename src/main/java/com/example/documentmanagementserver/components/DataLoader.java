@@ -55,6 +55,7 @@ public class DataLoader implements ApplicationRunner {
                 "100-00-00-762", "567458123", "0013001563", "666256533",
                 "example@o2.com", address10, adversePartyAttorney1);
         Case aCase = new Case(client, adverseParty1, proceedingsSubject, court);
+        aCase.setStatus("Zakończona");
         caseRepository.save(aCase);
 
         Address address2 = new Address("Wrocław", "50-100", "Łabędzia", "59");

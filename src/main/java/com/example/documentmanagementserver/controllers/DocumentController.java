@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -24,6 +25,9 @@ public class DocumentController {
     @PostMapping("/document/add/{caseId}")
     public ResponseEntity<Integer> addDocument(@PathVariable int caseId, @RequestBody Document document) {
         Optional<Case> aCase = caseRepository.findById(caseId);
+        if(aCase.isPresent() && Objects.equals(aCase.get().getStatus(), "Zakończona")) {
+            return new ResponseEntity<>(500, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
         Document savedDocument;
         if (aCase.isPresent()) {
             document.setDocumentCase(aCase.get());
@@ -45,6 +49,13 @@ public class DocumentController {
 
     @DeleteMapping("/document/delete/{documentId}")
     public ResponseEntity<Integer> deleteDocument(@PathVariable int documentId) {
+        Optional<Document> document = documentRepository.findById(documentId);
+        if(document.isPresent()) {
+            if(Objects.equals(document.get().getDocumentCase().getStatus(), "Zakończona")) {
+                return new ResponseEntity<>(500, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+
         try {
             documentRepository.deleteById(documentId);
         } catch (Exception e) {
@@ -56,12 +67,15 @@ public class DocumentController {
 
     @PutMapping("/document/update")
     public ResponseEntity<Integer> updateDocument(@RequestBody Document document) {
+        Document documentInDatabase = documentRepository.findById(document.getId()).get();
+        if(Objects.equals(documentInDatabase.getDocumentCase().getStatus(), "Zakończona")) {
+            return new ResponseEntity<>(500, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        document.setDocumentCase(documentInDatabase.getDocumentCase());
+        if (document.getFile() == null) {
+            document.setFile(documentInDatabase.getFile());
+        }
         try {
-            Document documentInDatabase = documentRepository.findById(document.getId()).get();
-            document.setDocumentCase(documentInDatabase.getDocumentCase());
-            if (document.getFile() == null) {
-                document.setFile(documentInDatabase.getFile());
-            }
             documentRepository.save(document);
         } catch (Exception e) {
             e.printStackTrace();
