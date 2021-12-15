@@ -28,22 +28,23 @@ public class AdversePartyAttorney {
     @NotNull
     private Address residenceOrRegisteredOfficeAddress;
     @NotNull
-    private Boolean isAttorneyProfessional;
-    @NotNull
-    private String jobTitle;
+    private String title;
     @OneToOne(cascade = {CascadeType.ALL}, orphanRemoval = true)
     private Address mailingAddress;
+    @NotNull
+    private String emailAddress;
 
     @JsonIgnore
     @OneToOne(mappedBy = "adversePartyAttorney")
     @ToString.Exclude
     private AdverseParty adverseParty;
 
-    public AdversePartyAttorney(String firstNameLastName, String phoneNumber, Address residenceOrRegisteredOfficeAddress, Boolean isAttorneyProfessional, String jobTitle) {
+    public AdversePartyAttorney(String firstNameLastName, String phoneNumber, String emailAddress,
+                                Address residenceOrRegisteredOfficeAddress, String title) {
         this.firstNameLastName = firstNameLastName;
         this.phoneNumber = phoneNumber;
+        this.emailAddress = emailAddress;
         this.residenceOrRegisteredOfficeAddress = residenceOrRegisteredOfficeAddress;
-        this.isAttorneyProfessional = isAttorneyProfessional;
-        this.jobTitle = jobTitle;
+        this.title = title;
     }
 }

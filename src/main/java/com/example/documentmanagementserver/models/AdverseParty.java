@@ -27,8 +27,9 @@ public class AdverseParty extends Client {
     @ToString.Exclude
     private Case bCase;
 
-    public AdverseParty(String firstnameAndLastNameOrCompanyName, String pesel, String nip, String regon, String krs, String phoneNumber, String emailAddress, Address residenceOrRegisteredOfficeAddress, AdversePartyAttorney adversePartyAttorney) {
-        super(firstnameAndLastNameOrCompanyName, pesel, nip, regon, krs, phoneNumber, emailAddress, residenceOrRegisteredOfficeAddress);
+    public AdverseParty(String firstnameAndLastNameOrCompanyName, String phoneNumber, String emailAddress,
+                        Address residenceOrRegisteredOfficeAddress, AdversePartyAttorney adversePartyAttorney) {
+        super(firstnameAndLastNameOrCompanyName, phoneNumber, emailAddress, residenceOrRegisteredOfficeAddress);
         this.adversePartyAttorney = adversePartyAttorney;
     }
 }

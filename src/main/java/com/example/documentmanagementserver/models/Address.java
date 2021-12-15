@@ -23,7 +23,6 @@ public class Address {
     private String city;
     @NotNull
     private String postcode;
-    @NotNull
     private String street;
     @NotNull
     private String buildingNumber;

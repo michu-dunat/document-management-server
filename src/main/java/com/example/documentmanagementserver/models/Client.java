@@ -23,13 +23,9 @@ public class Client {
 
     @NotNull
     private String firstNameLastNameCompanyName;
-    @NotNull
     private String pesel;
-    @NotNull
     private String nip;
-    @NotNull
     private String regon;
-    @NotNull
     private String krs;
     @NotNull
     private String phoneNumber;
@@ -46,12 +42,8 @@ public class Client {
     @ToString.Exclude
     private Case aCase;
 
-    public Client(String firstNameLastNameCompanyName, String pesel, String nip, String regon, String krs, String phoneNumber, String emailAddress, Address residenceOrRegisteredOfficeAddress) {
+    public Client(String firstNameLastNameCompanyName, String phoneNumber, String emailAddress, Address residenceOrRegisteredOfficeAddress) {
         this.firstNameLastNameCompanyName = firstNameLastNameCompanyName;
-        this.pesel = pesel;
-        this.nip = nip;
-        this.regon = regon;
-        this.krs = krs;
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
         this.residenceOrRegisteredOfficeAddress = residenceOrRegisteredOfficeAddress;

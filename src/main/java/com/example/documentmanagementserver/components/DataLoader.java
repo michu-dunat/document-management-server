@@ -30,9 +30,9 @@ public class DataLoader implements ApplicationRunner {
 
     public void run(ApplicationArguments args) {
         Address address = new Address("Tychy", "43-100", "Budowlanych", "170");
-        Client client = new Client("Michał Dunat", "99080000000",
-                "106-00-00-062", "123456785", "0000133156", "721000000",
+        Client client = new Client("Michał Dunat", "721000000",
                 "email@gmail.com", address);
+        client.setPesel("99080000000");
         Address address1 = new Address("Tychy", "43-110", "Stoczniowców", "60");
         Judge judge = new Judge("Anna Maria");
         Judge judge1 = new Judge("Maria Anna");
@@ -47,10 +47,11 @@ public class DataLoader implements ApplicationRunner {
         Address address9 = new Address("Białystok", "11-100", "Majorska", "12");
         Address address10 = new Address("Zabrze", "22-110", "Rejsowa", "11");
 
-        AdversePartyAttorney adversePartyAttorney1 = new AdversePartyAttorney("Michał Rosa", "666533256", address9, true, "Adwokat");
-        AdverseParty adverseParty1 = new AdverseParty("Zuzanna Las", "95444440000",
-                "100-00-00-762", "567458123", "0013001563", "666256533",
+        AdversePartyAttorney adversePartyAttorney1 = new AdversePartyAttorney("Michał Rosa",
+                "666533256","haha@XDDD.com", address9, "Adwokat");
+        AdverseParty adverseParty1 = new AdverseParty("Zuzanna Las","666256533",
                 "example@o2.com", address10, adversePartyAttorney1);
+        adverseParty1.setPesel("95444440000");
         Case aCase = new Case(client, adverseParty1, proceedingsSubject, court);
         aCase.setStatus("Zakończona");
         caseRepository.save(aCase);
@@ -66,9 +67,11 @@ public class DataLoader implements ApplicationRunner {
         Address address8 = new Address("Brzeg", "21-110", "Brzegowa", "2a");
         address8.setApartmentNumber("11a");
 
-        Client client1 = new Client("Jakub Jerzy", "95040200120",
-                "122-00-00-166", "135467528", "0000154123", "666000000",
+        Client client1 = new Client("Maspex","666000000",
                 "email@example.com", address2);
+        client1.setNip("122-00-00-166");
+        client1.setRegon("135467528");
+        client1.setKrs("0000154123");
         client1.setMailingAddress(address3);
 
         Judge judge2 = new Judge("Jan Kowalski");
@@ -86,11 +89,11 @@ public class DataLoader implements ApplicationRunner {
 
         ProceedingsSubject proceedingsSubject1 = new ProceedingsSubject("2000ZŁ", false);
 
-        AdversePartyAttorney adversePartyAttorney = new AdversePartyAttorney("Elżbieta Górnaś", "666256000", address5, true, "Radca prawny");
+        AdversePartyAttorney adversePartyAttorney = new AdversePartyAttorney("Elżbieta Górnaś", "666256000", "XDD@XDDD.com", address5, "Radca prawny");
         adversePartyAttorney.setMailingAddress(address6);
-        AdverseParty adverseParty = new AdverseParty("Joachim Mały", "92111000000",
-                "100-00-00-562", "567812345", "0013300156", "700200100",
+        AdverseParty adverseParty = new AdverseParty("Joachim Mały", "700200100",
                 "example@gmail.com", address7, adversePartyAttorney);
+        adverseParty.setPesel("92111000000");
         adverseParty.setMailingAddress(address8);
 
         Case aCase1 = new Case(client1, adverseParty, proceedingsSubject1, court1);
