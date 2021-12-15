@@ -42,7 +42,7 @@ public class DataLoader implements ApplicationRunner {
         Court court = new Court("Rejonowy", address1, "4", "123456789",
                 "o2g50b0uoy", "court@examole.com", "IP AX/Cd 670", judges);
         court.addCourtToAllJudges();
-        ProceedingsSubject proceedingsSubject = new ProceedingsSubject("1000ZŁ", true);
+        ProceedingsSubject proceedingsSubject = new ProceedingsSubject("Brak", true);
 
         Address address9 = new Address("Białystok", "11-100", "Majorska", "12");
         Address address10 = new Address("Zabrze", "22-110", "Rejsowa", "11");
@@ -87,7 +87,7 @@ public class DataLoader implements ApplicationRunner {
                 "5oy0bo2g0u", "example@court.com", "ŁI ŁE/Ło 69", judges1);
         court1.addCourtToAllJudges();
 
-        ProceedingsSubject proceedingsSubject1 = new ProceedingsSubject("2000ZŁ", false);
+        ProceedingsSubject proceedingsSubject1 = new ProceedingsSubject("2000", false);
 
         AdversePartyAttorney adversePartyAttorney = new AdversePartyAttorney("Elżbieta Górnaś", "666256000", "XDD@XDDD.com", address5, "Radca prawny");
         adversePartyAttorney.setMailingAddress(address6);
