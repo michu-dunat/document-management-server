@@ -43,9 +43,6 @@ public class DataLoader implements ApplicationRunner {
                 "o2g50b0uoy", "court@examole.com", "IP AX/Cd 670", judges);
         court.addCourtToAllJudges();
         ProceedingsSubject proceedingsSubject = new ProceedingsSubject("1000ZŁ", true);
-        Date date = Date.valueOf("2021-11-15");
-        proceedingsSubject.setClaimReceiptDate(date);
-
 
         Address address9 = new Address("Białystok", "11-100", "Majorska", "12");
         Address address10 = new Address("Zabrze", "22-110", "Rejsowa", "11");
@@ -88,8 +85,6 @@ public class DataLoader implements ApplicationRunner {
         court1.addCourtToAllJudges();
 
         ProceedingsSubject proceedingsSubject1 = new ProceedingsSubject("2000ZŁ", false);
-        Date date1 = Date.valueOf("2021-11-14");
-        proceedingsSubject1.setFillingDate(date1);
 
         AdversePartyAttorney adversePartyAttorney = new AdversePartyAttorney("Elżbieta Górnaś", "666256000", address5, true, "Radca prawny");
         adversePartyAttorney.setMailingAddress(address6);

@@ -42,13 +42,7 @@ public class CaseService {
         ) {
             String label = aCase.getClient().getFirstNameLastNameCompanyName() + " kontra "
                     + aCase.getAdverseParty().getFirstNameLastNameCompanyName();
-            Date fillingOrClaimingDate = null;
-            if (aCase.getProceedingsSubject().getFillingDate() == null) {
-                fillingOrClaimingDate = aCase.getProceedingsSubject().getClaimReceiptDate();
-            } else {
-                fillingOrClaimingDate = aCase.getProceedingsSubject().getFillingDate();
-            }
-            casesForTable.add(new CaseForTable(aCase.getId(), label, fillingOrClaimingDate, aCase.getStatus()));
+            casesForTable.add(new CaseForTable(aCase.getId(), label, aCase.getStatus()));
         }
         return casesForTable;
     }
@@ -82,8 +76,9 @@ public class CaseService {
 
         List<ProceedingsSubject> proceedingsSubjects = new ArrayList<>();
         try {
-            java.sql.Date parsedDate = java.sql.Date.valueOf(searchInput);
-            proceedingsSubjects.addAll(proceedingsSubjectRepository.findAllByAnyDate(searchInput));
+//            java.sql.Date parsedDate = java.sql.Date.valueOf(searchInput);
+//            proceedingsSubjects.addAll(proceedingsSubjectRepository.findAllByAnyDate(searchInput));
+            proceedingsSubjects.addAll(proceedingsSubjectRepository.findAllByValue(searchInput));
         } catch (Exception e) {
             proceedingsSubjects.addAll(proceedingsSubjectRepository.findAllByValue(searchInput));
         }

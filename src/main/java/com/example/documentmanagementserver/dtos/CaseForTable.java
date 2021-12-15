@@ -5,8 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.sql.Date;
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,13 +13,11 @@ public class CaseForTable {
 
     private int id;
     private String label;
-    private Date fillingOrClaimingDate;
     private String status;
 
-    public CaseForTable(int id, String label, Date fillingOrClaimingDate, String status) {
+    public CaseForTable(int id, String label, String status) {
         this.id = id;
         this.label = label;
-        this.fillingOrClaimingDate = fillingOrClaimingDate;
         this.status = status;
     }
 }

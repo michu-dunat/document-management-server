@@ -22,8 +22,6 @@ public class ProceedingsSubject {
 
     @NotNull
     private String value;
-    private java.sql.Date fillingDate;
-    private java.sql.Date claimReceiptDate;
     @NotNull
     private Boolean isMediationPossible;
 
