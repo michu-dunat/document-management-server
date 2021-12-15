@@ -31,10 +31,15 @@ public class Document {
     private String addresseeOrSender;
     @NotNull
     private Boolean isIncoming;
+    private String methodOfReceipt;
+    private java.sql.Date dateOfDelivery;
     @NotNull
     private java.sql.Date dateOfReceiptOrDispatch;
     @NotNull
+    private java.sql.Date dateOfLetter;
+    @NotNull
     private String fileName;
+    private String comments;
 
 
     private Boolean isResponseRequired;
@@ -46,12 +51,13 @@ public class Document {
     @JoinColumn(name = "case_id")
     private Case documentCase;
 
-    public Document(String type, String addresseeOrSender, Boolean isIncoming, Date dateOfReceiptOrDispatch,
+    public Document(String type, String addresseeOrSender, Boolean isIncoming, Date dateOfReceiptOrDispatch, Date dateOfLetter,
                     @NotNull byte[] file, Boolean isResponseRequired, Date deadlineForResponse, String fileName) {
         this.type = type;
         this.addresseeOrSender = addresseeOrSender;
         this.isIncoming = isIncoming;
         this.dateOfReceiptOrDispatch = dateOfReceiptOrDispatch;
+        this.dateOfLetter = dateOfLetter;
         this.file = file;
         this.isResponseRequired = isResponseRequired;
         this.deadlineForResponse = deadlineForResponse;
