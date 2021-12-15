@@ -24,6 +24,9 @@ public class ProceedingsSubject {
     private String value;
     @NotNull
     private Boolean isMediationPossible;
+    private String comments;
+    private String otherProceedingsSubjectType;
+    private String otherProceedingsSubjectName;
 
     @JsonIgnore
     @OneToOne(mappedBy = "proceedingsSubject")
