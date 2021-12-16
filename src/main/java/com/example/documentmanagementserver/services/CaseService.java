@@ -83,8 +83,8 @@ public class CaseService {
         }
         proceedingsSubjects.forEach(proceedingsSubject -> caseSet.add(proceedingsSubject.getACase()));
 
-        List<Subject> subjects = judgeRepository.findAllByFirstNameLastName(searchInput);
-        subjects.forEach(subject -> caseSet.add(subject.getCourt().getACase()));
+        List<Entity> entities = judgeRepository.findAllByFirstNameLastName(searchInput);
+        entities.forEach(entity -> caseSet.add(entity.getCourt().getACase()));
 
         List<Court> courts = courtRepository.findAllByAnything(searchInput);
         courts.forEach(court -> caseSet.add(court.getACase()));

@@ -10,7 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Entity
+@javax.persistence.Entity
 @Getter
 @Setter
 @NoArgsConstructor

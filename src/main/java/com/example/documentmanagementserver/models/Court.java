@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 
-@Entity
+@javax.persistence.Entity
 @Getter
 @Setter
 @NoArgsConstructor
@@ -42,7 +42,7 @@ public class Court {
 
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "court")
     @NotNull
-    private List<Subject> subjects;
+    private List<Entity> entities;
 
     @JsonIgnore
     @OneToOne(mappedBy = "court")
@@ -51,7 +51,7 @@ public class Court {
 
     public Court(String type, Address address, String department, String phoneNumber,
                  String electronicAddressForDelivery, String emailAddress, String caseSignature,
-                 List<Subject> subjects, String unitType) {
+                 List<Entity> entities, String unitType) {
         this.type = type;
         this.address = address;
         this.department = department;
@@ -59,14 +59,14 @@ public class Court {
         this.electronicAddressForDelivery = electronicAddressForDelivery;
         this.emailAddress = emailAddress;
         this.caseSignature = caseSignature;
-        this.subjects = subjects;
+        this.entities = entities;
         this.unitType = unitType;
     }
 
     public void addCourtToAllSubjects() {
-        for (Subject subject : this.subjects
+        for (Entity entity : this.entities
         ) {
-            subject.setCourt(this);
+            entity.setCourt(this);
         }
     }
 }

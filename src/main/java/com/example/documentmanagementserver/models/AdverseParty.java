@@ -11,7 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
-@Entity
+@javax.persistence.Entity
 @Getter
 @Setter
 @NoArgsConstructor

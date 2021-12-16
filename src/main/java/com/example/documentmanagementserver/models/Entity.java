@@ -9,12 +9,12 @@ import lombok.ToString;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Entity
+@javax.persistence.Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
-public class Subject {
+public class Entity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +30,7 @@ public class Subject {
     @ToString.Exclude
     private Court court;
 
-    public Subject(String firstNameLastName, String position) {
+    public Entity(String firstNameLastName, String position) {
         this.firstNameLastName = firstNameLastName;
         this.position = position;
     }
