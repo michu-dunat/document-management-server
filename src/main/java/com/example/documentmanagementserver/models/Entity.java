@@ -30,6 +30,11 @@ public class Entity {
     @ToString.Exclude
     private Court court;
 
+    @JsonIgnore
+    @ManyToOne
+    @ToString.Exclude
+    private Proceeding proceeding;
+
     public Entity(String firstNameLastName, String position) {
         this.firstNameLastName = firstNameLastName;
         this.position = position;

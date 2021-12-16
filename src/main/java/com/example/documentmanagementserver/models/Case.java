@@ -33,17 +33,17 @@ public class Case {
     private AdverseParty adverseParty;
     @OneToOne(cascade = {CascadeType.ALL})
     @NotNull
-    private ProceedingsSubject proceedingsSubject;
+    private Proceeding proceeding;
     @OneToOne(cascade = {CascadeType.ALL})
     @NotNull
     private Court court;
     @NotNull
     private String status;
 
-    public Case(Client client, AdverseParty adverseParty, ProceedingsSubject proceedingsSubject, Court court) {
+    public Case(Client client, AdverseParty adverseParty, Proceeding proceeding, Court court) {
         this.client = client;
         this.adverseParty = adverseParty;
-        this.proceedingsSubject = proceedingsSubject;
+        this.proceeding = proceeding;
         this.court = court;
         this.status = "W toku";
     }

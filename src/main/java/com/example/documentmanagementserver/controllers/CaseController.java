@@ -4,7 +4,7 @@ import com.example.documentmanagementserver.dtos.CaseForTable;
 import com.example.documentmanagementserver.models.Case;
 import com.example.documentmanagementserver.repositories.AddressRepository;
 import com.example.documentmanagementserver.repositories.CaseRepository;
-import com.example.documentmanagementserver.repositories.JudgeRepository;
+import com.example.documentmanagementserver.repositories.EntityRepository;
 import com.example.documentmanagementserver.services.CaseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,12 +24,13 @@ public class CaseController {
 
     private final CaseRepository caseRepository;
     private final AddressRepository addressRepository;
-    private final JudgeRepository judgeRepository;
+    private final EntityRepository entityRepository;
     private final CaseService caseService;
 
     @PostMapping("/case/add")
     public ResponseEntity<Integer> addCase(@RequestBody Case aCase) {
         aCase.getCourt().addCourtToAllSubjects();
+        aCase.getProceeding().addProceedingToAllSubjects();
         try {
             caseRepository.save(aCase);
         } catch (Exception e) {
@@ -84,8 +85,10 @@ public class CaseController {
         if (Objects.equals(aCase.getStatus(), "Zakończona")) {
             return new ResponseEntity<>(500, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        judgeRepository.deleteAllByCourt(aCase.getCourt());
+        entityRepository.deleteAllByCourt(aCase.getCourt());
+        entityRepository.deleteAllByProceeding(aCase.getProceeding());
         aCase.getCourt().addCourtToAllSubjects();
+        aCase.getProceeding().addProceedingToAllSubjects();
         try {
             caseRepository.save(aCase);
         } catch (Exception e) {

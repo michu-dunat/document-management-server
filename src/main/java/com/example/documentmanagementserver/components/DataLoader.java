@@ -52,7 +52,7 @@ public class DataLoader implements ApplicationRunner {
         Court court = new Court("Rejonowy", address1, "4", "123456789",
                 "o2g50b0uoy", "court@examole.com", "IP AX/Cd 670", entities, "Wydział zamiejscowy");
         court.addCourtToAllSubjects();
-        ProceedingsSubject proceedingsSubject = new ProceedingsSubject("Brak", true);
+        Proceeding proceeding = new Proceeding("Brak", true);
 
         Address address9 = new Address("Białystok", "11-100", "Majorska", "12");
         Address address10 = new Address("Zabrze", "22-110", "Rejsowa", "11");
@@ -62,7 +62,7 @@ public class DataLoader implements ApplicationRunner {
         AdverseParty adverseParty1 = new AdverseParty("Zuzanna Las","666256533",
                 "example@o2.com", address10, adversePartyAttorney1);
         adverseParty1.setPesel("95444440000");
-        Case aCase = new Case(client, adverseParty1, proceedingsSubject, court);
+        Case aCase = new Case(client, adverseParty1, proceeding, court);
         aCase.setStatus("Zakończona");
         caseRepository.save(aCase);
 
@@ -97,7 +97,7 @@ public class DataLoader implements ApplicationRunner {
                 "5oy0bo2g0u", "example@court.com", "ŁI ŁE/Ło 69", judges1, "Siedziba");
         court1.addCourtToAllSubjects();
 
-        ProceedingsSubject proceedingsSubject1 = new ProceedingsSubject("2000", false);
+        Proceeding proceeding1 = new Proceeding("2000", false);
 
         AdversePartyAttorney adversePartyAttorney = new AdversePartyAttorney("Elżbieta Górnaś", "666256000", "XDD@XDDD.com", address5, "Radca prawny");
         adversePartyAttorney.setMailingAddress(address6);
@@ -106,7 +106,7 @@ public class DataLoader implements ApplicationRunner {
         adverseParty.setPesel("92111000000");
         adverseParty.setMailingAddress(address8);
 
-        Case aCase1 = new Case(client1, adverseParty, proceedingsSubject1, court1);
+        Case aCase1 = new Case(client1, adverseParty, proceeding1, court1);
         caseRepository.save(aCase1);
         byte[] fileByteArray = null;
         byte[] fileByteArray1 = null;

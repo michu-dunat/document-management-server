@@ -18,10 +18,10 @@ public class CaseService {
     private AddressRepository addressRepository;
 
     @Autowired
-    private ProceedingsSubjectRepository proceedingsSubjectRepository;
+    private ProceedingRepository proceedingRepository;
 
     @Autowired
-    private JudgeRepository judgeRepository;
+    private EntityRepository entityRepository;
 
     @Autowired
     private CourtRepository courtRepository;
@@ -73,17 +73,17 @@ public class CaseService {
             }
         });
 
-        List<ProceedingsSubject> proceedingsSubjects = new ArrayList<>();
+        List<Proceeding> proceedings = new ArrayList<>();
         try {
 //            java.sql.Date parsedDate = java.sql.Date.valueOf(searchInput);
 //            proceedingsSubjects.addAll(proceedingsSubjectRepository.findAllByAnyDate(searchInput));
-            proceedingsSubjects.addAll(proceedingsSubjectRepository.findAllByValue(searchInput));
+            proceedings.addAll(proceedingRepository.findAllByValue(searchInput));
         } catch (Exception e) {
-            proceedingsSubjects.addAll(proceedingsSubjectRepository.findAllByValue(searchInput));
+            proceedings.addAll(proceedingRepository.findAllByValue(searchInput));
         }
-        proceedingsSubjects.forEach(proceedingsSubject -> caseSet.add(proceedingsSubject.getACase()));
+        proceedings.forEach(proceeding -> caseSet.add(proceeding.getACase()));
 
-        List<Entity> entities = judgeRepository.findAllByFirstNameLastName(searchInput);
+        List<Entity> entities = entityRepository.findAllByFirstNameLastName(searchInput);
         entities.forEach(entity -> caseSet.add(entity.getCourt().getACase()));
 
         List<Court> courts = courtRepository.findAllByAnything(searchInput);

@@ -8,13 +8,14 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @javax.persistence.Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
-public class ProceedingsSubject {
+public class Proceeding {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,18 +25,26 @@ public class ProceedingsSubject {
     private String value;
     @NotNull
     private Boolean isMediationPossible;
-    private String comments;
-    private String otherProceedingsSubjectType;
-    private String otherProceedingsSubjectName;
     private String basisForMediation;
+    private String comments;
+
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "proceeding")
+    private List<Entity> otherEntities;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "proceedingsSubject")
+    @OneToOne(mappedBy = "proceeding")
     @ToString.Exclude
     private Case aCase;
 
-    public ProceedingsSubject(String value, Boolean isMediationPossible) {
+    public Proceeding(String value, Boolean isMediationPossible) {
         this.value = value;
         this.isMediationPossible = isMediationPossible;
+    }
+
+    public void addProceedingToAllSubjects() {
+        for (Entity entity : this.otherEntities
+        ) {
+            entity.setProceeding(this);
+        }
     }
 }
