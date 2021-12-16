@@ -2,8 +2,10 @@ package com.example.documentmanagementserver.controllers;
 
 import com.example.documentmanagementserver.models.Case;
 import com.example.documentmanagementserver.models.Document;
+import com.example.documentmanagementserver.models.User;
 import com.example.documentmanagementserver.repositories.CaseRepository;
 import com.example.documentmanagementserver.repositories.DocumentRepository;
+import com.example.documentmanagementserver.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,7 @@ import java.util.Optional;
 public class DocumentController {
     private final DocumentRepository documentRepository;
     private final CaseRepository caseRepository;
+    private final UserRepository userRepository;
 
     @PostMapping("/document/add/{caseId}")
     public ResponseEntity<Integer> addDocument(@PathVariable int caseId, @RequestBody Document document) {
@@ -33,6 +36,7 @@ public class DocumentController {
             document.setDocumentCase(aCase.get());
         }
 
+
         try {
             savedDocument = documentRepository.save(document);
         } catch (Exception e) {
@@ -44,7 +48,14 @@ public class DocumentController {
     @GetMapping("/document/list/{caseId}")
     @ResponseBody
     public List<Document> getAllDocumentForCase(@PathVariable int caseId) {
-        return documentRepository.findAllByDocumentCase_Id(caseId);
+        List<Document> documents = documentRepository.findAllByDocumentCase_Id(caseId);
+        for (Document document: documents
+             ) {
+            document.getSender().setPassword("");
+            document.getSender().setEmailAddress("");
+            document.getSender().setRole(null);
+        }
+        return documents;
     }
 
     @DeleteMapping("/document/delete/{documentId}")

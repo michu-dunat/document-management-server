@@ -29,6 +29,16 @@ public class DataLoader implements ApplicationRunner {
     private final UserRepository userRepository;
 
     public void run(ApplicationArguments args) {
+        Role role1 = new Role("ROLE_ADMIN", "Administrator");
+        Role role2 = new Role("ROLE_USER", "Użytkownik");
+        roleRepository.save(role1);
+        roleRepository.save(role2);
+
+        User user1 = new User("Michał Dunat", "michu@gmail.com", passwordEncoder.encode("Useruseruser1"), role1);
+        User user2 = new User("Aleksandra Dunat", "ola@gmail.com", passwordEncoder.encode("Useruseruser1"), role2);
+        userRepository.save(user1);
+        userRepository.save(user2);
+
         Address address = new Address("Tychy", "43-100", "Budowlanych", "170");
         Client client = new Client("Michał Dunat", "721000000",
                 "email@gmail.com", address);
@@ -116,18 +126,12 @@ public class DataLoader implements ApplicationRunner {
         document.setDateOfDelivery(Date.valueOf("2021-11-18"));
         document.setDocumentCase(aCase);
         document1.setDocumentCase(aCase);
+        document.setSender(user1);
+        document1.setSender(user2);
 
         documentRepository.save(document);
         documentRepository.save(document1);
 
-        Role role1 = new Role("ROLE_ADMIN", "Administrator");
-        Role role2 = new Role("ROLE_USER", "Użytkownik");
-        roleRepository.save(role1);
-        roleRepository.save(role2);
 
-        User user1 = new User("Michał Dunat", "michu@gmail.com", passwordEncoder.encode("Useruseruser1"), role1);
-        User user2 = new User("Aleksandra Dunat", "ola@gmail.com", passwordEncoder.encode("Useruseruser1"), role2);
-        userRepository.save(user1);
-        userRepository.save(user2);
     }
 }

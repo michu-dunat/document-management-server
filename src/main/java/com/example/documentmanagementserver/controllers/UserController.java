@@ -1,7 +1,9 @@
 package com.example.documentmanagementserver.controllers;
 
+import com.example.documentmanagementserver.dtos.UserNamesForDocumentSenderField;
 import com.example.documentmanagementserver.models.User;
 import com.example.documentmanagementserver.repositories.UserRepository;
+import com.example.documentmanagementserver.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,6 +24,7 @@ import java.util.Optional;
 public class UserController {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final UserService userService;
 
     @PostMapping("/user/add")
     public ResponseEntity<Integer> addUser(@RequestBody User user) {
@@ -113,5 +116,11 @@ public class UserController {
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent()) user.get().setPassword("");
         return user;
+    }
+
+    @GetMapping(value="/user/possible-document-senders")
+    @ResponseBody
+    public List<UserNamesForDocumentSenderField> getUsersNames() {
+        return userService.findAndPrepareUsersNames();
     }
 }
