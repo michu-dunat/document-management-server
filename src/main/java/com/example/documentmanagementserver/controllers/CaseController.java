@@ -29,7 +29,7 @@ public class CaseController {
 
     @PostMapping("/case/add")
     public ResponseEntity<Integer> addCase(@RequestBody Case aCase) {
-        aCase.getCourt().addCourtToAllJudges();
+        aCase.getCourt().addCourtToAllSubjects();
         try {
             caseRepository.save(aCase);
         } catch (Exception e) {
@@ -85,7 +85,7 @@ public class CaseController {
             return new ResponseEntity<>(500, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         judgeRepository.deleteAllByCourt(aCase.getCourt());
-        aCase.getCourt().addCourtToAllJudges();
+        aCase.getCourt().addCourtToAllSubjects();
         try {
             caseRepository.save(aCase);
         } catch (Exception e) {

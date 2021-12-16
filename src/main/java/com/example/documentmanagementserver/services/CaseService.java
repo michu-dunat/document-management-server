@@ -6,7 +6,6 @@ import com.example.documentmanagementserver.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.util.*;
 
 @Service
@@ -84,8 +83,8 @@ public class CaseService {
         }
         proceedingsSubjects.forEach(proceedingsSubject -> caseSet.add(proceedingsSubject.getACase()));
 
-        List<Judge> judges = judgeRepository.findAllByFirstNameLastName(searchInput);
-        judges.forEach(judge -> caseSet.add(judge.getCourt().getACase()));
+        List<Subject> subjects = judgeRepository.findAllByFirstNameLastName(searchInput);
+        subjects.forEach(subject -> caseSet.add(subject.getCourt().getACase()));
 
         List<Court> courts = courtRepository.findAllByAnything(searchInput);
         courts.forEach(court -> caseSet.add(court.getACase()));

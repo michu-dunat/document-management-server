@@ -34,14 +34,14 @@ public class DataLoader implements ApplicationRunner {
                 "email@gmail.com", address);
         client.setPesel("99080000000");
         Address address1 = new Address("Tychy", "43-110", "Stoczniowców", "60");
-        Judge judge = new Judge("Anna Maria");
-        Judge judge1 = new Judge("Maria Anna");
-        List<Judge> judges = new ArrayList<>();
-        judges.add(judge);
-        judges.add(judge1);
+        Subject subject = new Subject("Anna Maria", "Sędzia");
+        Subject subject1 = new Subject("Maria Anna", "Ławnik");
+        List<Subject> subjects = new ArrayList<>();
+        subjects.add(subject);
+        subjects.add(subject1);
         Court court = new Court("Rejonowy", address1, "4", "123456789",
-                "o2g50b0uoy", "court@examole.com", "IP AX/Cd 670", judges);
-        court.addCourtToAllJudges();
+                "o2g50b0uoy", "court@examole.com", "IP AX/Cd 670", subjects, "Wydział zamiejscowy");
+        court.addCourtToAllSubjects();
         ProceedingsSubject proceedingsSubject = new ProceedingsSubject("Brak", true);
 
         Address address9 = new Address("Białystok", "11-100", "Majorska", "12");
@@ -74,18 +74,18 @@ public class DataLoader implements ApplicationRunner {
         client1.setKrs("0000154123");
         client1.setMailingAddress(address3);
 
-        Judge judge2 = new Judge("Jan Kowalski");
-        Judge judge3 = new Judge("Tomasz Przedziałowy");
-        Judge judge4 = new Judge("Adam Tkacz");
-        Judge judge5 = new Judge("Matylda Ernel");
-        List<Judge> judges1 = new ArrayList<>();
-        judges1.add(judge2);
-        judges1.add(judge3);
-        judges1.add(judge4);
-        judges1.add(judge5);
+        Subject subject2 = new Subject("Jan Kowalski", "Sędzia");
+        Subject subject3 = new Subject("Tomasz Przedziałowy", "Ławnik");
+        Subject subject4 = new Subject("Adam Tkacz","Ławnik");
+        Subject subject5 = new Subject("Matylda Ernel", "Ławnik");
+        List<Subject> judges1 = new ArrayList<>();
+        judges1.add(subject2);
+        judges1.add(subject3);
+        judges1.add(subject4);
+        judges1.add(subject5);
         Court court1 = new Court("Okręgowy", address4, "2", "583065334",
-                "5oy0bo2g0u", "example@court.com", "ŁI ŁE/Ło 69", judges1);
-        court1.addCourtToAllJudges();
+                "5oy0bo2g0u", "example@court.com", "ŁI ŁE/Ło 69", judges1, "Siedziba");
+        court1.addCourtToAllSubjects();
 
         ProceedingsSubject proceedingsSubject1 = new ProceedingsSubject("2000", false);
 

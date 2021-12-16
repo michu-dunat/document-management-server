@@ -37,17 +37,21 @@ public class Court {
     private String emailAddress;
     @NotNull
     private String caseSignature;
+    @NotNull
+    private String unitType;
 
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "court")
     @NotNull
-    private List<Judge> judgingPanel;
+    private List<Subject> subjects;
 
     @JsonIgnore
     @OneToOne(mappedBy = "court")
     @ToString.Exclude
     private Case aCase;
 
-    public Court(String type, Address address, String department, String phoneNumber, String electronicAddressForDelivery, String emailAddress, String caseSignature, List<Judge> judgingPanel) {
+    public Court(String type, Address address, String department, String phoneNumber,
+                 String electronicAddressForDelivery, String emailAddress, String caseSignature,
+                 List<Subject> subjects, String unitType) {
         this.type = type;
         this.address = address;
         this.department = department;
@@ -55,13 +59,14 @@ public class Court {
         this.electronicAddressForDelivery = electronicAddressForDelivery;
         this.emailAddress = emailAddress;
         this.caseSignature = caseSignature;
-        this.judgingPanel = judgingPanel;
+        this.subjects = subjects;
+        this.unitType = unitType;
     }
 
-    public void addCourtToAllJudges() {
-        for (Judge judge : this.judgingPanel
+    public void addCourtToAllSubjects() {
+        for (Subject subject : this.subjects
         ) {
-            judge.setCourt(this);
+            subject.setCourt(this);
         }
     }
 }

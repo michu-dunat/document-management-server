@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 @NoArgsConstructor
 @ToString
-public class Judge {
+public class Subject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,13 +22,16 @@ public class Judge {
 
     @NotNull
     private String firstNameLastName;
+    @NotNull
+    private String position;
 
     @JsonIgnore
     @ManyToOne
     @ToString.Exclude
     private Court court;
 
-    public Judge(String firstNameLastName) {
+    public Subject(String firstNameLastName, String position) {
         this.firstNameLastName = firstNameLastName;
+        this.position = position;
     }
 }
