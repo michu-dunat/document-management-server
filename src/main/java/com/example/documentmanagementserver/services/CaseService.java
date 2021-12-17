@@ -20,6 +20,19 @@ public class CaseService {
     private final ClientRepository clientRepository;
     private final AdversePartyRepository adversePartyRepository;
 
+    public void removeEntitiesFromDatabase(Case aCase) {
+        entityRepository.deleteAllByCourt(aCase.getCourt());
+        entityRepository.deleteAllByProceeding(aCase.getProceeding());
+
+    }
+
+
+    public void setCourtOrProceedingToEntities(Case aCase) {
+        aCase.getCourt().addCourtToAllEntities();
+        aCase.getProceeding().addProceedingToAllEntities();
+    }
+
+
     private List<CaseForTable> prepareCasesForTable(Collection<Case> cases) {
         ArrayList<CaseForTable> casesForTable = new ArrayList<>();
         for (Case aCase : cases

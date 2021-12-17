@@ -48,4 +48,10 @@ public class Proceeding {
             }
         }
     }
+
+    public void setBasisForMediationToNullIfMediationIsNotPossible() {
+        if(!this.getIsMediationPossible()) {
+            this.setBasisForMediation(null);
+        }
+    }
 }
