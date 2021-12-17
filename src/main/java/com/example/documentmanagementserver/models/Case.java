@@ -9,6 +9,7 @@ import lombok.ToString;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Objects;
 
 @javax.persistence.Entity
 @Getter
@@ -46,5 +47,9 @@ public class Case {
         this.proceeding = proceeding;
         this.court = court;
         this.status = "W toku";
+    }
+
+    public boolean isCaseFinished() {
+        return Objects.equals(this.status, "Zakończona");
     }
 }
