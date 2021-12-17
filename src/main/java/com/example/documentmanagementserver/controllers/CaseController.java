@@ -29,8 +29,11 @@ public class CaseController {
 
     @PostMapping("/case/add")
     public ResponseEntity<Integer> addCase(@RequestBody Case aCase) {
-        aCase.getCourt().addCourtToAllSubjects();
-        aCase.getProceeding().addProceedingToAllSubjects();
+        aCase.getCourt().addCourtToAllEntities();
+        aCase.getProceeding().addProceedingToAllEntities();
+        if(!aCase.getProceeding().getIsMediationPossible() && aCase.getProceeding().getBasisForMediation() != null) {
+            aCase.getProceeding().setBasisForMediation(null);
+        }
         try {
             caseRepository.save(aCase);
         } catch (Exception e) {
@@ -85,10 +88,13 @@ public class CaseController {
         if (Objects.equals(aCase.getStatus(), "Zakończona")) {
             return new ResponseEntity<>(500, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+        if(!aCase.getProceeding().getIsMediationPossible() && aCase.getProceeding().getBasisForMediation() != null) {
+            aCase.getProceeding().setBasisForMediation(null);
+        }
         entityRepository.deleteAllByCourt(aCase.getCourt());
         entityRepository.deleteAllByProceeding(aCase.getProceeding());
-        aCase.getCourt().addCourtToAllSubjects();
-        aCase.getProceeding().addProceedingToAllSubjects();
+        aCase.getCourt().addCourtToAllEntities();
+        aCase.getProceeding().addProceedingToAllEntities();
         try {
             caseRepository.save(aCase);
         } catch (Exception e) {

@@ -41,10 +41,12 @@ public class Proceeding {
         this.isMediationPossible = isMediationPossible;
     }
 
-    public void addProceedingToAllSubjects() {
-        for (Entity entity : this.otherEntities
-        ) {
-            entity.setProceeding(this);
+    public void addProceedingToAllEntities() {
+        if(this.otherEntities != null) {
+            for (Entity entity : this.otherEntities
+            ) {
+                entity.setProceeding(this);
+            }
         }
     }
 }

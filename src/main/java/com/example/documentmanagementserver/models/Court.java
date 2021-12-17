@@ -63,7 +63,7 @@ public class Court {
         this.unitType = unitType;
     }
 
-    public void addCourtToAllSubjects() {
+    public void addCourtToAllEntities() {
         for (Entity entity : this.entities
         ) {
             entity.setCourt(this);

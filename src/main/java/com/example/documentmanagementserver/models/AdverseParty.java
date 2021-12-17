@@ -18,8 +18,7 @@ import javax.validation.constraints.NotNull;
 @ToString(callSuper = true)
 public class AdverseParty extends Client {
 
-    @OneToOne(cascade = {CascadeType.ALL})
-    @NotNull
+    @OneToOne(cascade = {CascadeType.ALL}, orphanRemoval = true)
     private AdversePartyAttorney adversePartyAttorney;
 
     @JsonIgnore

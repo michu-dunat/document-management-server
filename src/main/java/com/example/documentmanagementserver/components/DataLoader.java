@@ -51,7 +51,7 @@ public class DataLoader implements ApplicationRunner {
         entities.add(entity1);
         Court court = new Court("Rejonowy", address1, "4", "123456789",
                 "o2g50b0uoy", "court@examole.com", "IP AX/Cd 670", entities, "Wydział zamiejscowy");
-        court.addCourtToAllSubjects();
+        court.addCourtToAllEntities();
         Proceeding proceeding = new Proceeding("Brak", true);
 
         Address address9 = new Address("Białystok", "11-100", "Majorska", "12");
@@ -95,7 +95,7 @@ public class DataLoader implements ApplicationRunner {
         judges1.add(entity5);
         Court court1 = new Court("Okręgowy", address4, "2", "583065334",
                 "5oy0bo2g0u", "example@court.com", "ŁI ŁE/Ło 69", judges1, "Siedziba");
-        court1.addCourtToAllSubjects();
+        court1.addCourtToAllEntities();
 
         Proceeding proceeding1 = new Proceeding("2000", false);
 
