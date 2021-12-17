@@ -77,13 +77,13 @@ public class CaseService {
         try {
 //            java.sql.Date parsedDate = java.sql.Date.valueOf(searchInput);
 //            proceedingsSubjects.addAll(proceedingsSubjectRepository.findAllByAnyDate(searchInput));
-            proceedings.addAll(proceedingRepository.findAllByValue(searchInput));
+            proceedings.addAll(proceedingRepository.findAllByAnything(searchInput));
         } catch (Exception e) {
-            proceedings.addAll(proceedingRepository.findAllByValue(searchInput));
+            proceedings.addAll(proceedingRepository.findAllByAnything(searchInput));
         }
         proceedings.forEach(proceeding -> caseSet.add(proceeding.getACase()));
 
-        List<Entity> entities = entityRepository.findAllByFirstNameLastName(searchInput);
+        List<Entity> entities = entityRepository.findAllByAnything(searchInput);
         entities.forEach(entity -> caseSet.add(entity.getCourt().getACase()));
 
         List<Court> courts = courtRepository.findAllByAnything(searchInput);
