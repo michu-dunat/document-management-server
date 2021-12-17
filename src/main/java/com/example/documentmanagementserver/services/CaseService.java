@@ -3,37 +3,22 @@ package com.example.documentmanagementserver.services;
 import com.example.documentmanagementserver.dtos.CaseForTable;
 import com.example.documentmanagementserver.models.*;
 import com.example.documentmanagementserver.repositories.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
+@RequiredArgsConstructor
 public class CaseService {
-
-    @Autowired
-    private CaseRepository caseRepository;
-
-    @Autowired
-    private AddressRepository addressRepository;
-
-    @Autowired
-    private ProceedingRepository proceedingRepository;
-
-    @Autowired
-    private EntityRepository entityRepository;
-
-    @Autowired
-    private CourtRepository courtRepository;
-
-    @Autowired
-    private AdversePartyAttorneyRepository adversePartyAttorneyRepository;
-
-    @Autowired
-    private ClientRepository clientRepository;
-
-    @Autowired
-    private AdversePartyRepository adversePartyRepository;
+    private final CaseRepository caseRepository;
+    private final AddressRepository addressRepository;
+    private final ProceedingRepository proceedingRepository;
+    private final EntityRepository entityRepository;
+    private final CourtRepository courtRepository;
+    private final AdversePartyAttorneyRepository adversePartyAttorneyRepository;
+    private final ClientRepository clientRepository;
+    private final AdversePartyRepository adversePartyRepository;
 
     private List<CaseForTable> prepareCasesForTable(Collection<Case> cases) {
         ArrayList<CaseForTable> casesForTable = new ArrayList<>();
@@ -75,8 +60,6 @@ public class CaseService {
 
         List<Proceeding> proceedings = new ArrayList<>();
         try {
-//            java.sql.Date parsedDate = java.sql.Date.valueOf(searchInput);
-//            proceedingsSubjects.addAll(proceedingsSubjectRepository.findAllByAnyDate(searchInput));
             proceedings.addAll(proceedingRepository.findAllByAnything(searchInput));
         } catch (Exception e) {
             proceedings.addAll(proceedingRepository.findAllByAnything(searchInput));
@@ -97,8 +80,6 @@ public class CaseService {
 
         List<AdverseParty> adverseParties = adversePartyRepository.findAllByAnything(searchInput);
         adverseParties.forEach(adverseParty -> caseSet.add(adverseParty.getBCase()));
-
-        caseSet.forEach(System.out::println);
 
         return prepareCasesForTable(caseSet);
     }

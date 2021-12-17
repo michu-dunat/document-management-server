@@ -58,8 +58,8 @@ public class DataLoader implements ApplicationRunner {
         Address address10 = new Address("Zabrze", "22-110", "Rejsowa", "11");
 
         AdversePartyAttorney adversePartyAttorney1 = new AdversePartyAttorney("Michał Rosa",
-                "666533256","haha@XDDD.com", address9, "Adwokat");
-        AdverseParty adverseParty1 = new AdverseParty("Zuzanna Las","666256533",
+                "666533256", "haha@XDDD.com", address9, "Adwokat");
+        AdverseParty adverseParty1 = new AdverseParty("Zuzanna Las", "666256533",
                 "example@o2.com", address10, adversePartyAttorney1);
         adverseParty1.setPesel("95444440000");
         Case aCase = new Case(client, adverseParty1, proceeding, court);
@@ -77,7 +77,7 @@ public class DataLoader implements ApplicationRunner {
         Address address8 = new Address("Brzeg", "21-110", "Brzegowa", "2a");
         address8.setApartmentNumber("11a");
 
-        Client client1 = new Client("Maspex","666000000",
+        Client client1 = new Client("Maspex", "666000000",
                 "email@example.com", address2);
         client1.setNip("122-00-00-166");
         client1.setRegon("135467528");
@@ -86,7 +86,7 @@ public class DataLoader implements ApplicationRunner {
 
         Entity entity2 = new Entity("Jan Kowalski", "Sędzia");
         Entity entity3 = new Entity("Tomasz Przedziałowy", "Ławnik");
-        Entity entity4 = new Entity("Adam Tkacz","Ławnik");
+        Entity entity4 = new Entity("Adam Tkacz", "Ławnik");
         Entity entity5 = new Entity("Matylda Ernel", "Ławnik");
         List<Entity> judges1 = new ArrayList<>();
         judges1.add(entity2);

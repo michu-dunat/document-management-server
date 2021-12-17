@@ -1,6 +1,5 @@
 package com.example.documentmanagementserver.repositories;
 
-import com.example.documentmanagementserver.models.Address;
 import com.example.documentmanagementserver.models.Court;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

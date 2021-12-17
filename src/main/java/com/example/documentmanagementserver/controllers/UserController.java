@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +18,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-@Controller
+@RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
     private final UserRepository userRepository;
@@ -37,7 +36,6 @@ public class UserController {
     }
 
     @GetMapping("/user/table")
-    @ResponseBody
     public List<User> getUsers() {
         List<User> users = userRepository.findAll();
         for (User user : users
@@ -54,16 +52,16 @@ public class UserController {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = "";
         if (principal instanceof UserDetails) {
-            username = ((UserDetails)principal).getUsername();
+            username = ((UserDetails) principal).getUsername();
         } else {
             username = principal.toString();
         }
-        if(Objects.equals(user.getEmailAddress(), username)) {
+        if (Objects.equals(user.getEmailAddress(), username)) {
             return new ResponseEntity<>(500, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        if(Objects.equals(user.getRole().getCode(), "ROLE_ADMIN")) {
-            if(userRepository.countAllByRole(user.getRole()) <= 1) {
+        if (Objects.equals(user.getRole().getCode(), "ROLE_ADMIN")) {
+            if (userRepository.countAllByRole(user.getRole()) <= 1) {
                 return new ResponseEntity<>(500, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
@@ -80,19 +78,19 @@ public class UserController {
     public ResponseEntity<Integer> updateUser(@RequestBody User user) {
         User userSavedInDatabase = userRepository.findById(user.getId()).get();
 
-        if(Objects.equals(user.getRole().getCode(), "ROLE_USER") && Objects.equals(userSavedInDatabase.getRole().getCode(), "ROLE_ADMIN")) {
+        if (Objects.equals(user.getRole().getCode(), "ROLE_USER") && Objects.equals(userSavedInDatabase.getRole().getCode(), "ROLE_ADMIN")) {
             Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             String username = "";
             if (principal instanceof UserDetails) {
-                username = ((UserDetails)principal).getUsername();
+                username = ((UserDetails) principal).getUsername();
             } else {
                 username = principal.toString();
             }
-            if(Objects.equals(user.getEmailAddress(), username)) {
+            if (Objects.equals(user.getEmailAddress(), username)) {
                 return new ResponseEntity<>(500, HttpStatus.INTERNAL_SERVER_ERROR);
             }
 
-            if(userRepository.countAllByRole(userSavedInDatabase.getRole()) <= 1) {
+            if (userRepository.countAllByRole(userSavedInDatabase.getRole()) <= 1) {
                 return new ResponseEntity<>(500, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
@@ -111,15 +109,13 @@ public class UserController {
     }
 
     @GetMapping(value = "/user/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
     public Optional<User> getUser(@PathVariable(value = "id") int id) {
         Optional<User> user = userRepository.findById(id);
-        if (user.isPresent()) user.get().setPassword("");
+        user.ifPresent(value -> value.setPassword(""));
         return user;
     }
 
-    @GetMapping(value="/user/possible-document-senders")
-    @ResponseBody
+    @GetMapping(value = "/user/possible-document-senders")
     public List<UserNamesForDocumentSenderField> getUsersNames() {
         return userService.findAndPrepareUsersNames();
     }

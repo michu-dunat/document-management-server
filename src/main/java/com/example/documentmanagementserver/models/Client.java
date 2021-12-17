@@ -20,7 +20,6 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private int id;
-
     @NotNull
     private String firstNameLastNameCompanyName;
     private String pesel;
@@ -42,7 +41,8 @@ public class Client {
     @ToString.Exclude
     private Case aCase;
 
-    public Client(String firstNameLastNameCompanyName, String phoneNumber, String emailAddress, Address residenceOrRegisteredOfficeAddress) {
+    public Client(String firstNameLastNameCompanyName, String phoneNumber, String emailAddress,
+                  Address residenceOrRegisteredOfficeAddress) {
         this.firstNameLastNameCompanyName = firstNameLastNameCompanyName;
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;

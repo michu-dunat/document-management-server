@@ -10,7 +10,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class CaseForTable {
-
     private int id;
     private String label;
     private String status;

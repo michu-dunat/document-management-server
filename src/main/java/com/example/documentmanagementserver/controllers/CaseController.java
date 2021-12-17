@@ -2,15 +2,12 @@ package com.example.documentmanagementserver.controllers;
 
 import com.example.documentmanagementserver.dtos.CaseForTable;
 import com.example.documentmanagementserver.models.Case;
-import com.example.documentmanagementserver.repositories.AddressRepository;
 import com.example.documentmanagementserver.repositories.CaseRepository;
 import com.example.documentmanagementserver.repositories.EntityRepository;
 import com.example.documentmanagementserver.services.CaseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,12 +15,10 @@ import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-@Controller
+@RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class CaseController {
-
     private final CaseRepository caseRepository;
-    private final AddressRepository addressRepository;
     private final EntityRepository entityRepository;
     private final CaseService caseService;
 
@@ -31,7 +26,7 @@ public class CaseController {
     public ResponseEntity<Integer> addCase(@RequestBody Case aCase) {
         aCase.getCourt().addCourtToAllEntities();
         aCase.getProceeding().addProceedingToAllEntities();
-        if(!aCase.getProceeding().getIsMediationPossible() && aCase.getProceeding().getBasisForMediation() != null) {
+        if (!aCase.getProceeding().getIsMediationPossible() && aCase.getProceeding().getBasisForMediation() != null) {
             aCase.getProceeding().setBasisForMediation(null);
         }
         try {
@@ -43,7 +38,6 @@ public class CaseController {
     }
 
     @GetMapping("/case/table")
-    @ResponseBody
     public List<CaseForTable> getCasesForTable() {
         return caseService.getAllCasesForTable();
     }
@@ -51,7 +45,7 @@ public class CaseController {
     @DeleteMapping("/case/delete/{id}")
     public ResponseEntity<Integer> deleteCase(@PathVariable(value = "id") int id) {
         Optional<Case> aCase = caseRepository.findById(id);
-        if(aCase.isPresent()) {
+        if (aCase.isPresent()) {
             if (Objects.equals(aCase.get().getStatus(), "Zakończona")) {
                 return new ResponseEntity<>(500, HttpStatus.INTERNAL_SERVER_ERROR);
             }
@@ -76,11 +70,9 @@ public class CaseController {
         return new ResponseEntity<>(200, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/case/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
+    @GetMapping(value = "/case/{id}")
     public Optional<Case> getCase(@PathVariable(value = "id") int id) {
-        Optional<Case> aCase = caseRepository.findById(id);
-        return aCase;
+        return caseRepository.findById(id);
     }
 
     @PutMapping("/case/update")
@@ -88,7 +80,7 @@ public class CaseController {
         if (Objects.equals(aCase.getStatus(), "Zakończona")) {
             return new ResponseEntity<>(500, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        if(!aCase.getProceeding().getIsMediationPossible() && aCase.getProceeding().getBasisForMediation() != null) {
+        if (!aCase.getProceeding().getIsMediationPossible() && aCase.getProceeding().getBasisForMediation() != null) {
             aCase.getProceeding().setBasisForMediation(null);
         }
         entityRepository.deleteAllByCourt(aCase.getCourt());
@@ -104,7 +96,6 @@ public class CaseController {
     }
 
     @GetMapping("/case/search/{input}")
-    @ResponseBody
     public List<CaseForTable> getCasesForTableForSearch(@PathVariable String input) {
         return caseService.getAllCasesForSearch(input);
     }

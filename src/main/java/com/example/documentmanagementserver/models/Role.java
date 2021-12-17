@@ -21,11 +21,9 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     @NotNull
     @Column(unique = true)
     private String code;
-
     @NotNull
     @Column(unique = true)
     private String name;
@@ -35,7 +33,7 @@ public class Role {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<User> users;
 
-    public Role(String code,String name)  {
+    public Role(String code, String name) {
         this.name = name;
         this.code = code;
     }

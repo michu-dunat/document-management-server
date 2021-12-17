@@ -20,7 +20,6 @@ public class Proceeding {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     @NotNull
     private String value;
     @NotNull
@@ -42,7 +41,7 @@ public class Proceeding {
     }
 
     public void addProceedingToAllEntities() {
-        if(this.otherEntities != null) {
+        if (this.otherEntities != null) {
             for (Entity entity : this.otherEntities
             ) {
                 entity.setProceeding(this);

@@ -18,7 +18,7 @@ public class UserService {
         List<UserNamesForDocumentSenderField> userNamesForDocumentSenderFieldList = new ArrayList<>();
         List<User> users = userRepository.findAll();
         for (User user : users
-             ) {
+        ) {
             UserNamesForDocumentSenderField userNamesForDocumentSenderField = new UserNamesForDocumentSenderField(user.getId(), user.getFirstNameLastName());
             userNamesForDocumentSenderFieldList.add(userNamesForDocumentSenderField);
         }

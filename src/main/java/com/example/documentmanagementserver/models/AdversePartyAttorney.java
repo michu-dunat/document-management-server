@@ -19,7 +19,6 @@ public class AdversePartyAttorney {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     @NotNull
     private String firstNameLastName;
     @NotNull

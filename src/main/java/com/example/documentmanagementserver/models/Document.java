@@ -31,19 +31,17 @@ public class Document {
     private String addresseeOrSender;
     @NotNull
     private Boolean isIncoming;
-    private String methodOfReceipt;
-    private java.sql.Date dateOfDelivery;
     @NotNull
     private java.sql.Date dateOfReceiptOrDispatch;
     @NotNull
     private java.sql.Date dateOfLetter;
     @NotNull
     private String fileName;
-    private String comments;
     @ManyToOne
     private User sender;
-
-
+    private String comments;
+    private String methodOfReceipt;
+    private java.sql.Date dateOfDelivery;
     private Boolean isResponseRequired;
     private java.sql.Date deadlineForResponse;
 
