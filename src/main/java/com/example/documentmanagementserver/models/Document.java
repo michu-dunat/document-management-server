@@ -40,7 +40,6 @@ public class Document {
     @NotNull
     private String fileName;
     private String comments;
-    @NotNull
     @ManyToOne
     private User sender;
 
