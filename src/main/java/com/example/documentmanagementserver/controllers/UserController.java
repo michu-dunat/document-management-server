@@ -6,7 +6,6 @@ import com.example.documentmanagementserver.repositories.UserRepository;
 import com.example.documentmanagementserver.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -37,12 +35,7 @@ public class UserController {
 
     @GetMapping("/user/table")
     public List<User> getUsers() {
-        List<User> users = userRepository.findAll();
-        for (User user : users
-        ) {
-            user.setPassword("");
-        }
-        return users;
+        return userService.getAllUsersWithNoPassword();
     }
 
     @DeleteMapping("/user/delete/{id}")
@@ -108,15 +101,13 @@ public class UserController {
         return new ResponseEntity<>(200, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/user/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Optional<User> getUser(@PathVariable(value = "id") int id) {
-        Optional<User> user = userRepository.findById(id);
-        user.ifPresent(value -> value.setPassword(""));
-        return user;
+    @GetMapping(value = "/user/{id}")
+    public User getUser(@PathVariable(value = "id") int id) {
+        return userService.getUserWithNoPassword(id);
     }
 
     @GetMapping(value = "/user/possible-document-senders")
-    public List<UserNamesForDocumentSenderField> getUsersNames() {
-        return userService.findAndPrepareUsersNames();
+    public List<UserNamesForDocumentSenderField> getNamesOfUsers() {
+        return userService.getNamesOfUsers();
     }
 }

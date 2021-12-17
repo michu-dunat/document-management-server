@@ -8,20 +8,39 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
 
-    public List<UserNamesForDocumentSenderField> findAndPrepareUsersNames() {
-        List<UserNamesForDocumentSenderField> userNamesForDocumentSenderFieldList = new ArrayList<>();
+    public List<UserNamesForDocumentSenderField> getNamesOfUsers() {
         List<User> users = userRepository.findAll();
-        for (User user : users
-        ) {
-            UserNamesForDocumentSenderField userNamesForDocumentSenderField = new UserNamesForDocumentSenderField(user.getId(), user.getFirstNameLastName());
-            userNamesForDocumentSenderFieldList.add(userNamesForDocumentSenderField);
+        return this.createListOfNamesOfUsers(users);
+    }
+
+    private List<UserNamesForDocumentSenderField> createListOfNamesOfUsers(List<User> users) {
+        List<UserNamesForDocumentSenderField> namesOfUsers = new ArrayList<>();
+        for (User user : users) {
+            UserNamesForDocumentSenderField namesOfUser =
+                    new UserNamesForDocumentSenderField(user.getId(), user.getFirstNameLastName());
+            namesOfUsers.add(namesOfUser);
         }
-        return userNamesForDocumentSenderFieldList;
+        return namesOfUsers;
+    }
+
+    public List<User> getAllUsersWithNoPassword() {
+        List<User> users = userRepository.findAll();
+        for (User user : users) {
+            user.setPassword("");
+        }
+        return users;
+    }
+
+    public User getUserWithNoPassword(int userId) {
+        Optional<User> user = userRepository.findById(userId);
+        user.ifPresent(value -> value.setPassword(""));
+        return user.orElse(null);
     }
 }
