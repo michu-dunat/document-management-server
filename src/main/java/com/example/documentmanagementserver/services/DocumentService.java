@@ -1,12 +1,14 @@
 package com.example.documentmanagementserver.services;
 
-import com.example.documentmanagementserver.models.Case;
 import com.example.documentmanagementserver.models.Document;
 import com.example.documentmanagementserver.repositories.DocumentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -35,9 +37,11 @@ public class DocumentService {
 
     private void removeUserSensitiveInformation(List<Document> documents) {
         for (Document document : documents) {
-            document.getSender().setPassword("");
-            document.getSender().setEmailAddress("");
-            document.getSender().setRole(null);
+            if (document.getSender() != null) {
+                document.getSender().setPassword("");
+                document.getSender().setEmailAddress("");
+                document.getSender().setRole(null);
+            }
         }
     }
 }

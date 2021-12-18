@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/document/delete/*").hasAnyRole("ADMIN")
                 .antMatchers("/user/possible-document-senders").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/user/*").hasAnyRole("ADMIN")
-                .antMatchers("/role").permitAll()
+                .antMatchers("/role").hasAnyRole("ADMIN")
                 .antMatchers("/**").hasAnyRole("ADMIN", "USER")
                 .and().cors().and().csrf().disable();
     }
