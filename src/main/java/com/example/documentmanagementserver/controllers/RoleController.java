@@ -11,7 +11,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "https://document-management-client.herokuapp.com"})
 public class RoleController {
     private final RoleRepository roleRepository;
 
