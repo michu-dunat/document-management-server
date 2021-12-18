@@ -20,6 +20,10 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    public void encodePassword(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    }
+
     public List<UserNamesForDocumentSenderField> getNamesOfUsers() {
         List<User> users = userRepository.findAll();
         return this.createListOfNamesOfUsers(users);

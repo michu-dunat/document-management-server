@@ -21,6 +21,7 @@ public class UserController {
 
     @PostMapping("/user/add")
     public ResponseEntity<Integer> addUser(@RequestBody User user) {
+        userService.encodePassword(user);
         try {
             userRepository.save(user);
         } catch (Exception e) {
