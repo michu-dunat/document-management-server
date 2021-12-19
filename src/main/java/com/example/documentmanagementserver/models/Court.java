@@ -38,6 +38,7 @@ public class Court {
     private String caseSignature;
     @NotNull
     private String unitType;
+    private String comments;
 
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "court")
     @NotNull

@@ -35,6 +35,7 @@ public class Client {
     private Address residenceOrRegisteredOfficeAddress;
     @OneToOne(cascade = {CascadeType.ALL}, orphanRemoval = true)
     private Address mailingAddress;
+    private String comments;
 
     @JsonIgnore
     @OneToOne(mappedBy = "client")
