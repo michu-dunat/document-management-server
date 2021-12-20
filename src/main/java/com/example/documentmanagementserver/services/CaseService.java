@@ -23,7 +23,6 @@ public class CaseService {
     public void removeEntitiesFromDatabase(Case aCase) {
         entityRepository.deleteAllByCourt(aCase.getCourt());
         entityRepository.deleteAllByProceeding(aCase.getProceeding());
-
     }
 
 
@@ -35,8 +34,7 @@ public class CaseService {
 
     private List<CaseForTable> prepareCasesForTable(Collection<Case> cases) {
         ArrayList<CaseForTable> casesForTable = new ArrayList<>();
-        for (Case aCase : cases
-        ) {
+        for (Case aCase : cases) {
             String label = aCase.getClient().getFirstNameLastNameCompanyName() + " kontra "
                     + aCase.getAdverseParty().getFirstNameLastNameCompanyName();
             casesForTable.add(new CaseForTable(aCase.getId(), label, aCase.getStatus()));
@@ -49,10 +47,8 @@ public class CaseService {
         return prepareCasesForTable(cases);
     }
 
-    public List<CaseForTable> getAllCasesForSearch(String searchInput) {
+    private Set<Case> getCasesForSearchFromAddresses(List<Address> addresses) {
         Set<Case> caseSet = new HashSet<>();
-
-        List<Address> addresses = addressRepository.findAllByAnything(searchInput);
         addresses.forEach(address -> {
             if (address.getAdversePartyAttorneyMailingAddress() != null) {
                 caseSet.add(address.getAdversePartyAttorneyMailingAddress().getAdverseParty().getBCase());
@@ -70,13 +66,14 @@ public class CaseService {
                 caseSet.add(address.getCourt().getACase());
             }
         });
+        return caseSet;
+    }
 
-        List<Proceeding> proceedings = new ArrayList<>();
-        try {
-            proceedings.addAll(proceedingRepository.findAllByAnything(searchInput));
-        } catch (Exception e) {
-            proceedings.addAll(proceedingRepository.findAllByAnything(searchInput));
-        }
+    public List<CaseForTable> getAllCasesForSearch(String searchInput) {
+        List<Address> addresses = addressRepository.findAllByAnything(searchInput);
+        Set<Case> caseSet = new HashSet<>(getCasesForSearchFromAddresses(addresses));
+
+        List<Proceeding> proceedings = proceedingRepository.findAllByAnything(searchInput);
         proceedings.forEach(proceeding -> caseSet.add(proceeding.getACase()));
 
         List<Entity> entities = entityRepository.findAllByAnything(searchInput);

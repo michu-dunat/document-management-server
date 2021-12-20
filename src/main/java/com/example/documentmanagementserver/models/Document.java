@@ -39,6 +39,7 @@ public class Document {
     private String fileName;
     @ManyToOne
     private User sender;
+    @Column(length = 10000)
     private String comments;
     private String methodOfReceipt;
     private java.sql.Date dateOfDelivery;

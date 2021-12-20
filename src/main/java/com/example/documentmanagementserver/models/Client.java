@@ -22,11 +22,16 @@ public class Client {
     private int id;
     @NotNull
     private String firstNameLastNameCompanyName;
+    @Column(length = 11)
     private String pesel;
+    @Column(length = 10)
     private String nip;
+    @Column(length = 14)
     private String regon;
+    @Column(length = 20)
     private String krs;
     @NotNull
+    @Column(length = 20)
     private String phoneNumber;
     @NotNull
     private String emailAddress;
@@ -35,6 +40,7 @@ public class Client {
     private Address residenceOrRegisteredOfficeAddress;
     @OneToOne(cascade = {CascadeType.ALL}, orphanRemoval = true)
     private Address mailingAddress;
+    @Column(length = 10000)
     private String comments;
 
     @JsonIgnore

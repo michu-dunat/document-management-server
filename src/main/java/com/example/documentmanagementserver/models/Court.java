@@ -22,22 +22,28 @@ public class Court {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotNull
+    @Column(length = 50)
     private String type;
     @OneToOne(cascade = {CascadeType.ALL})
     @NotNull
     private Address address;
     @NotNull
+    @Column(length = 50)
     private String department;
     @NotNull
+    @Column(length = 20)
     private String phoneNumber;
     @NotNull
+    @Column(length = 50)
     private String electronicAddressForDelivery;
     @NotNull
     private String emailAddress;
     @NotNull
     private String caseSignature;
     @NotNull
+    @Column(length = 50)
     private String unitType;
+    @Column(length = 10000)
     private String comments;
 
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "court")

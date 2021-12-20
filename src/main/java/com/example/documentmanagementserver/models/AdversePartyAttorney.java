@@ -22,6 +22,7 @@ public class AdversePartyAttorney {
     @NotNull
     private String firstNameLastName;
     @NotNull
+    @Column(length = 20)
     private String phoneNumber;
     @OneToOne(cascade = {CascadeType.ALL})
     @NotNull

@@ -25,6 +25,7 @@ public class Proceeding {
     @NotNull
     private Boolean isMediationPossible;
     private String basisForMediation;
+    @Column(length = 10000)
     private String comments;
 
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "proceeding")

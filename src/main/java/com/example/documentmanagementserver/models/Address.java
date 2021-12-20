@@ -6,10 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @javax.persistence.Entity
@@ -25,10 +22,13 @@ public class Address {
     @NotNull
     private String city;
     @NotNull
+    @Column(length = 6)
     private String postcode;
     private String street;
     @NotNull
+    @Column(length = 20)
     private String buildingNumber;
+    @Column(length = 20)
     private String apartmentNumber;
 
     @JsonIgnore
