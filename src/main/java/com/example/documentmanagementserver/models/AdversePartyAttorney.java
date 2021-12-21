@@ -24,7 +24,7 @@ public class AdversePartyAttorney {
     @NotNull
     @Column(length = 20)
     private String phoneNumber;
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne(cascade = {CascadeType.ALL}, orphanRemoval = true)
     @NotNull
     private Address residenceOrRegisteredOfficeAddress;
     @NotNull

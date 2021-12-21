@@ -75,7 +75,7 @@ public class UserService {
         return Objects.equals(user.getEmailAddress(), getUsernameOfLoggedInUser());
     }
 
-    private boolean wasPasswordChanged(User user) {
+    public boolean wasPasswordChanged(User user) {
         return !Objects.equals(user.getPassword(), "");
     }
 
